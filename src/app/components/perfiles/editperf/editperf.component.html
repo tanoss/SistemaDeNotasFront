@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Editar Perfil</h2>
+<hr>
+<mat-dialog-content>
+    <form #editP="ngForm">
+        <div class="modificar">
+            <mat-form-field>
+                <mat-label class="texto">Nombre</mat-label>
+                <input class="modnombre" matInput [(ngModel)]="data.perNombre" name="pernombre" type="text"
+                    placeholder="Nombre del Perfil" required="Ingrese un nombre de Perfil" minlength="4"
+                    #perNombre="ngModel">
+                <mat-error *ngIf="perNombre.hasError('required')">El nombre del perfil es requerido
+                </mat-error>
+                <mat-error>Mínimo 4 letras /*caracteres especiales NO ADMITIDOS*</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label class="texto">Sistema al que pertenece</mat-label>
+                <input class="modificar" matInput [(value)]="data.segSistemas.sisNombre" name="pernombre" type="text"
+                    placeholder="Sistema al que pertenece" disabled>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions style="justify-content: center">
+    <button class="btn-ng" mat-stroked-button mat-primary color="primary" (click)="cerrarModal()">Cancelar</button>
+    <button mat-stroked-button mat-primary color="warn" [disabled]="editP.invalid"
+        (click)="actualizarPerfil()">Actualizar</button>
+</mat-dialog-actions>

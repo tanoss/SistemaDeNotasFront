@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Borrar Sistema</h2>
+<hr>
+<mat-dialog-content>
+    <div>
+        <p>
+            ¿Está seguro que desea borrar este Sistema?
+            <br>Sistema a Borrar: <strong>{{data.descripcion}}</strong>
+        </p>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="cerrarModal()">Cancelar</button>
+    <button mat-raised-button mat-primary color="warn" (click)="borrarSistema(this.data.id)">Borrar</button>
+</mat-dialog-actions>

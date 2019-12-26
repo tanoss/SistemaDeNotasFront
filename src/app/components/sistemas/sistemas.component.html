@@ -1,0 +1,152 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title"><b>SISTEMAS</b></h4>
+            <strong>
+                <p class="card-category"> Sistemas existentes - ESPE</p>
+            </strong>
+        </div>
+        <div class="container-fluid">
+            <p></p>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                    </mat-form-field>
+                    <div class="col-md-4">
+                        <a id="modal-77315" href="#modal-container-77315" role="button" class="btn" data-toggle="modal">
+                            <mat-icon aria-label="Edit">visibility</mat-icon>&nbsp; IMPORTANTE!!
+                        </a>
+
+                        <div class="modal fade" id="modal-container-77315" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="text-align: center">
+                                        <strong>
+                                            Recuerda, si creas un nuevo SISTEMA, no lo podrás ELIMINAR</strong>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" style="text-align: center"
+                                            data-dismiss="modal">
+                                            CERRAR
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <div *ngIf="crear==1">
+                            <button mat-stroked-button color="primary" (click)="addSistemas()">
+                                <mat-icon>add</mat-icon>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <!-- <div class="row justify-content-center">
+                            <button class="informacion" matTooltip="Visualizar sistemas por ESTADO (activo/inactivo)"
+                                matTooltipClass="example-tooltip-red" aria-label="Button that shows a red tooltip"
+                                class="example-button" mat-stroked-button color="primary">
+                                <mat-icon aria-label="Edit">info</mat-icon>
+                            </button> -->
+                        <!-- <button mat-raised-button (click)="openDialog()">
+                                    <mat-icon aria-label="Edit">info
+                                    </mat-icon>
+                                    Pick one</button> -->
+
+                        <!-- <div class="alert alert-warning" role="alert">
+                            <button mat-icon-button color="primary">
+                                <mat-icon aria-label="Edit">info</mat-icon>
+                                <strong>VISUALIZAR SISTEMAS POR ESTADO </strong>
+                            </button>
+                        </div> -->
+
+                        <!-- <button mat-icon-button color="primary">
+                                <mat-icon aria-label="Edit">info</mat-icon>
+                        </button> -->
+                        <!-- <button mat-icon-button color="primary">
+                                <mat-icon aria-label="Edit">visibility</mat-icon>
+                            </button> -->
+
+
+                        <mat-form-field>
+                            <mat-label>SISTEMAS por ESTADO</mat-label>
+                            <mat-select>
+                                <mat-option (click)=" cargarSistemas('segs')">
+                                    Activo
+                                </mat-option>
+                                <mat-option (click)=" cargarSistemas('segsi')">
+                                    Inactivo
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <table mat-table [(dataSource)]="dataSource" matSort>
+                            <ng-container matColumnDef="nombre">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre del sistema</b>
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.sisNombre}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="url">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Url del sistema</b> </th>
+                                <td mat-cell *matCellDef="let element"> {{element.sisUrlSistema}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="opciones">
+                                <th class="centre" mat-header-cell *matHeaderCellDef>
+                                    <div *ngIf="editar==1"><b>Opciones</b> </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div class="row justify-content-center" *ngIf="editar==1">
+                                        <button mat-icon-button color="primary"
+                                            (click)="editarSistema(element.sisId,element.sisEstado)">
+                                            <mat-icon aria-label="Edit">edit</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+            <mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
+            </mat-error>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </div>
+</div>

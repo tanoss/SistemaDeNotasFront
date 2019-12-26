@@ -1,0 +1,20 @@
+
+ .example-card {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ #titulo{
+     color: #00703c;
+ }
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #00703c !important;
+   }
+  
+::ng-deep.mat-form-field-underline {
+    background-color:#00703c !important;
+  } 
+  
+::ng-deep.mat-form-field-ripple {
+   background-color: #00703c !important;;
+  }

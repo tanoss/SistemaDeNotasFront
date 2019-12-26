@@ -1,0 +1,223 @@
+<div class="main-content">
+  <div class="card">
+    <div class="card-header card-header-danger">
+      <h4 class="card-title"><b>Control Usuarios</b></h4>
+      <strong>
+        <p class="card-category"> Control de Usuarios existentes - ESPE</p>
+      </strong>
+    </div>
+
+<br>
+    <div class="container-fluid">
+
+        <div class="col-md-4">
+            <a id="modal-77315" href="#modal-container-77315" role="button" class="btn" data-toggle="modal">
+                <mat-icon aria-label="Edit">visibility</mat-icon>&nbsp; IMPORTANTE!!
+            </a>
+
+            <div class="modal fade" id="modal-container-77315" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="text-align: center">
+                            <strong>
+                                Si no encuentras un USUARIO, contacta con servicio al cliente</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" style="text-align: center"
+                                data-dismiss="modal">
+                                CERRAR
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+      <mat-tab-group>
+        <mat-tab label="Opcion 1">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-4">
+                
+                <br>
+                <mat-form-field>
+                  <input matInput type="text" (keyup)="cargarSistemasUsuario($event.target.value)"
+                    placeholder="Buscar Usuario...">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-8">
+                <mat-form-field>
+                  <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-8">
+                <table mat-table [(dataSource)]="dataSourceSistema" matSort>
+                  <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre del sistema</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.sistema}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="url">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Url del sistema</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="opciones">
+                    <th class="centre" mat-header-cell *matHeaderCellDef>
+                      <div><b>Opciones</b> </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i=index;">
+                      <div class="row justify-content-center">
+                        <div>
+                          <button mat-icon-button color="primary" (click)="verPerfiles()">
+                            <mat-icon aria-label="Edit">visibility</mat-icon>
+                          </button>
+                        </div>
+                        <div>
+                          <button mat-icon-button color="primary" (click)="editarPerfiles()">
+                            <mat-icon aria-label="Delete">edit</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsSistemas"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsSistemas;"></tr>
+                </table>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+
+          </div>
+        </mat-tab>
+        <mat-tab label="Opcion 2">
+          <div class="container-fluid">
+            <p></p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Seleccione un Sistema</mat-label>
+                    <mat-select [(ngModel)]="sistema1.sisId" name="sisop">
+                      <mat-option *ngFor="let sistema of sistemas " value="{{sistema.sisId}}"
+                        (click)=" listperfil(sistema.sisId);usuariosSis(sistema.sisId)">
+                        {{sistema.sisNombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Seleccione un Perfil</mat-label>
+                    <mat-select [(ngModel)]="perfil.perId" name="peropc">
+                      <mat-option *ngFor="let perfil of profiles " value="{{perfil.perId}}"
+                        (click)=" usuariosPerf(perfil.perId)">
+                        {{perfil.perNombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                  <mat-form-field>
+                    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                  <table mat-table [(dataSource)]="dataSourceUsuario" matSort>
+                    <ng-container matColumnDef="usuNombres">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+                      <td mat-cell *matCellDef="let element"> {{element.usuNombres}} </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="usuApellidos">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                      <td mat-cell *matCellDef="let element"> {{element.usuApellidos}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="usuCc">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. Cédula </th>
+                      <td mat-cell *matCellDef="let element"> {{element.usuCc}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="spridenId">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cod. Id</th>
+                      <td mat-cell *matCellDef="let element"> {{element.spridenId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="spridenPidm">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cod. Pidm </th>
+                      <td mat-cell *matCellDef="let element"> {{element.spridenPidm}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="opciones">
+                      <th class="centre" mat-header-cell *matHeaderCellDef>
+                        <div><b>Opciones</b> </div>
+                      </th>
+                      <td mat-cell *matCellDef="let element; let i=index;">
+                        <div class="row justify-content-center">
+                          <div>
+                            <button mat-icon-button color="primary" (click)="editarPerfiles()">
+                              <mat-icon aria-label="Edit">visibility</mat-icon>
+                            </button>
+                          </div>
+                          <div>
+                            <button mat-icon-button color="primary"
+                              (click)="eliminarPerfil(element.perId, element.perNombre)">
+                              <mat-icon aria-label="Delete">edit</mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsUsuarios"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsUsuarios;"></tr>
+                  </table>
+                </div>
+                <div class="col-md-2">
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
+      </mat-error>
+      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>

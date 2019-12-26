@@ -1,0 +1,101 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title"><b>Asignación de Perfiles</b></h4>
+            <strong>
+              <p class="card-category"> Asignación de Perfiles a usuarios- ESPE</p>
+            </strong>
+          </div>
+          <br>
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-label>Seleccione un Sistema</mat-label>
+                          <mat-select [(ngModel)]="sistema1.sisId" name="sisop">
+                            <mat-option *ngFor="let sistema of sistemas " value="{{sistema.sisId}}"
+                              (click)=" listperfil(sistema.sisId)">
+                              {{sistema.sisNombre}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-label>Seleccione un perfil</mat-label>
+                          <mat-select [(ngModel)]="perfil.perId" name="peropc">
+                            <mat-option *ngFor="let perfil of profiles " value="{{perfil.perId}}" (click)=" usuarios()">
+                              {{perfil.perNombre}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <mat-card *ngIf="mostrarMensajeFiltro">No existen resultados</mat-card>
+              <table mat-table [(dataSource)]="dataSource" matSort>
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"
+                  (click)="data1()">
+                </mat-checkbox> -->
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation();addListUsuPer(row.usuId,perfil.perId)"
+                      (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="usuNombres">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+                  <td mat-cell *matCellDef="let element"> {{element.usuNombres}} </td>
+                </ng-container> -->
+                <ng-container matColumnDef="usuApellidos">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+                  <td mat-cell *matCellDef="let element"> {{element.usuApellidos}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="usuCc">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> No. Cédula </th>
+                  <td mat-cell *matCellDef="let element"> {{element.usuCc}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="spridenId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Cod. Id</th>
+                  <td mat-cell *matCellDef="let element"> {{element.spridenId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="spridenPidm">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Cod. Pidm </th>
+                  <td mat-cell *matCellDef="let element"> {{element.spridenPidm}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15]" showFirstLastButtons>
+              </mat-paginator>
+            </div>
+            <mat-card-actions>
+              <button mat-raised-button mat-primary color="primary" (click)="saveListUsuPer()">Agregar</button>
+            </mat-card-actions>
+          </div>
+        </div>
+      </div>
+    </div>

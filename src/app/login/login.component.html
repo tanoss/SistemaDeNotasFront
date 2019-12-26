@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 banner-sec">
+                    <div class="signup__overlay"></div>
+                    <div class="banner">
+                        <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
+                            <div class="carousel-inner text-center">
+                                <div class="carousel-item active">
+                                    <!-- <img src="../../assets/img/Espe-Logo.png" class="img-fluid center"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 login-sec" style="text-align:center">
+                    <h2 class="text-center">BIENVENIDO AL SISTEMA DE NOTAS</h2>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <mat-card class="example-card">
+                                            <mat-card-content>
+                                                <form #login="ngForm" class="example-form" (keyup.enter)="loginpass()">
+                                                    <mat-form-field appearance="legacy">
+                                                        <mat-label class="texto"> <strong>Cedula</strong></mat-label>
+                                                        <input matInput placeholder="Ingrese su Id"
+                                                            [(ngModel)]="credential.cedula" name="usuario" required
+                                                            #usuarioInput="ngModel">
+                                                        <mat-error *ngIf="usuarioInput.hasError('required')">Cedula es
+                                                            requerido.
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="legacy">
+                                                        <mat-label class="texto"><Strong>Contraseña</Strong></mat-label>
+                                                        <input matInput placeholder="Ingrese su contraseña"
+                                                            [(ngModel)]="credential.clave" name="contraseña" required
+                                                            #passInput="ngModel" [type]="hide ? 'password' : 'text'">
+                                                        <mat-icon class="material-icons" matSuffix
+                                                            (click)="hide = !hide">
+                                                            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                        <mat-error *ngIf="passInput.hasError('required')">Contraseña es
+                                                            requerido.
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </form>
+                                            </mat-card-content>
+                                            <mat-card-actions>
+                                                <button class="btn btn-success btn-round" [disabled]="login.invalid"
+                                                    type="submit"
+                                                    (click)="loginpass()"><strong>Ingresar</strong></button>
+                                            </mat-card-actions>
+                                        </mat-card>
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copy-text">
+                            <p class="piePagina"><i class="fa fa-copyright"></i> PENIEL CHRISTIAN SCHOOL</p>
+                            <p class="piePagina"><a href="https://www.espe.edu.ec">TODOS LOS DERECHOS
+                                    RESERVADOS.</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

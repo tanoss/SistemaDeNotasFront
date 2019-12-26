@@ -1,0 +1,100 @@
+<div class="main-content">
+  <div class="card">
+      <div class="card-header card-header-danger">
+          <h4 class="card-title"><b>PERFILES</b></h4>
+          <p class="card-category"> Perfiles existentes - ESPE</p>
+      </div>
+      <div class="container-fluid">
+          <p></p>
+          <div class="row">
+              <div class="col-md-6">
+                  <mat-form-field>
+                      <mat-label>Seleccione Un Sistema</mat-label>
+                      <mat-select [(ngModel)]="sistema1.sisId" name="sisop">
+                          <mat-option *ngFor="let sistema of sistemas " value="{{sistema.sisId}}"
+                              (click)=" listperfil(sistema.sisId)">
+                              {{sistema.sisNombre}}
+                          </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                  <mat-form-field>
+                      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                      <mat-card *ngIf="mostrarMensajeFiltro">No existen resultados</mat-card>
+                  </mat-form-field>
+              </div>
+              <div class="col-md-2">
+              </div>
+          </div>
+      </div>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-sm-4 col-md-4">
+                  <button mat-raised-button color="primary">
+                      <mat-icon>add</mat-icon>
+                      <span>Agregar</span>
+                  </button>
+              </div>
+              <div class="col-md-8"></div>
+          </div>
+      </div>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-8">
+                  <table mat-table [(dataSource)]="dataSource" matSort>
+                      <ng-container matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                          <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+                      </ng-container>
+                      
+                      <ng-container matColumnDef="nombreper">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del Perfil</th>
+                          <td mat-cell *matCellDef="let element"> {{element.perNombre}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="nmestado">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones Asignadas </th>
+                              <td mat-cell *matCellDef="let element; let i=index;">
+                                  <button mat-icon-button color="primary" (click)="perles(element.perId)">
+                                      <mat-icon aria-label="show">visibility</mat-icon>
+                                  </button>
+                              </td>
+                          
+
+                      </ng-container>
+
+                      <ng-container matColumnDef="editar">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>   Editar </th>
+                          <td mat-cell *matCellDef="let element; let i=index;">
+                              <button mat-icon-button color="primary" (click)="perles(element.perId)">
+                                  <mat-icon aria-label="Edit">edit</mat-icon>
+                              </button>
+                          </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="eliminar">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>   Eliminar </th>
+                          <td mat-cell *matCellDef="let element; let i=index;">
+                              <button mat-icon-button color="warn"
+                                  (click)="eliminarOpcion(element.opcId, element.opcNombre)">
+                                  <mat-icon aria-label="Delete">delete</mat-icon>
+                              </button>
+                              
+                          </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+              </div>
+              <div class="col-md-2">
+              </div>
+          </div>
+      </div>
+      <mat-paginator class="paginator" [pageSize]="5" [pageSizeOptions]="[5,10, 15,20,30,50, 100]"
+          showFirstLastButtons>
+      </mat-paginator>
+  </div>
+</div>

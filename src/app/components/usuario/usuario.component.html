@@ -1,0 +1,79 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="content">
+              <fieldset class="form-group">
+                <form (ngSubmit)="buscar()" #usuario="ngForm">
+                  <legend><b>Búsqueda:</b></legend><br>
+                  <label for="usuCc" class="card-category"><b>Cédula/Pasaporte:</b>
+                  </label><br>
+                  <input type="text" class="form-control" [(ngModel)]="usuarios.usuCc"
+                    placeholder="Ingrese un número de cédula" required name="ced">
+                </form>
+                <button mat-raised-button color="primary" [disabled]="!usuario.valid" (click)="buscar()">
+                  <i class="material-icons">search</i>BUSCAR</button>
+              </fieldset>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header card-header-danger">
+                <h4 class="card-title">RESULTADO DE LA BÚSQUEDA || Cédula : <b>{{user.usuCc}}</b></h4>
+                <p class="card-category">Resumen de la búsqueda</p>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="card-category">Nombres:</label>
+                    <p class="card-category">{{user.usuNombres}}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="card-category">Apellidos:</label>
+                    <p class="card-category">{{user.usuApellidos}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">Correo personal:</label>
+                    <p class="card-category">{{user.usuEmail}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">Tipo de documento:</label>
+                    <p class="card-category">{{user.usuTipoDoc}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">Cédula:</label>
+                    <p class="card-category">{{user.usuCc}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">Codigo Senescyt:</label>
+                    <p class="card-category">{{user.usuCodSenescyt}}</p>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="card-category">Correo institucional:</label>
+                    <p class="card-category">{{user.usuEmailInstitucional}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">Spriden Id:</label>
+                    <p class="card-category">{{user.spridenId}}</p>
+                  </div>
+                  <div class="col-md-4 col-sm-6 col-6">
+                    <label class="card-category">spriden Pidm:</label>
+                    <p class="card-category">{{user.spridenPidm}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="crear==1">
+              <div class="col-12" style="justify-content: center">
+                <button mat-raised-button color="primary" *ngIf="guardar" (click)="confirmar()">
+                  <i class="material-icons">check</i>Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

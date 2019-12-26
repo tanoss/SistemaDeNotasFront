@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Borrar Opción</h2>
+<hr>
+<mat-dialog-content>
+    <div>
+        <p class="alerta">
+            ¿Está seguro que desea eliminar esta opción?
+        </p>
+        <p>
+            <br>Opción a eliminar: <strong>{{data.opcNombre}}</strong>
+        </p>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center">
+    <button class="btn-ng" mat-stroked-button color="primary" (click)="cerrarModal()">Cancelar</button>
+    <button mat-stroked-button color="warn" (click)="eliminarOpcion(this.data.id)">Eliminar</button>
+</mat-dialog-actions>

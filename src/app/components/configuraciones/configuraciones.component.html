@@ -1,0 +1,71 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h3 class="card-title">Configuraciones del perfil </h3>
+        <p class="card-category"><strong>Cambio de clave se seguridad.</strong> </p>
+      </div>
+      <div class="card-body">
+        <mat-horizontal-stepper linear #stepper>
+          <mat-step [stepControl]="pass" [editable]="false">
+            <form #pass="ngForm">
+              <ng-template matStepLabel>Contraseña Actual</ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label> <strong>Contraseña</strong></mat-label>
+                    <input matInput placeholder="Ingrese su contraseña" [(ngModel)]="passEdt.clave" name="actual"
+                      [type]="hide ? 'password' : 'text'" required #passOld="ngModel">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="passOld.hasError('required')">La contraseña actual es requerida</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div>
+                <button mat-stroked-button class="btn-ng" routerLink="/dashboard" color="warn"
+                  matStepperNext>Cancelar</button>
+                <button mat-stroked-button color="primary" [disabled]="pass.invalid"
+                  (click)="confPass(stepper)">Confirmar</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="passUpd">
+            <form #passUpd="ngForm">
+              <ng-template matStepLabel>Nueva contraseña</ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label> <strong>Contraseña</strong></mat-label>
+                    <input matInput placeholder="Ingrese su nueva contraseña" [(ngModel)]="passNw.clave"
+                      name="antigua" [type]="hide ? 'password' : 'text'" minlength="6" #passNew="ngModel" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="passNew.hasError('required')">La nueva contraseña es requerida.</mat-error>
+                    <mat-error *ngIf="passNew.hasError('minlength')">Mínimo 6 caracteres son requeridos. </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div>
+                <button mat-stroked-button class="btn-ng" routerLink="/dashboard" color="warn"
+                  matStepperNext>Cancelar</button>
+                <button mat-stroked-button color="primary" matStepperNext
+                  [disabled]="passUpd.invalid">Continuar</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="checkpass">
+            <form [formGroup]="checkpass">
+              <ng-template matStepLabel>Confirmar</ng-template>
+              <mat-checkbox formControlName="check"><strong> Esta seguro del cambio de clave de seguridad.</strong>
+              </mat-checkbox>
+              <div>
+                <button mat-stroked-button class="btn-ng" matStepperPrevious [disabled]="checkpass.valid">Atras</button>
+                <button mat-stroked-button color="primary" [disabled]="checkpass.invalid"
+                  (click)="actulizarPass()">Guardar</button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>

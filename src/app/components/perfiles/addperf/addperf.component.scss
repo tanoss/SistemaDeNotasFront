@@ -1,0 +1,26 @@
+.texto {
+  color: #00713d;
+}
+h2 {
+  text-align: center;
+}
+
+hr {
+  border-color: #00713d;
+}
+
+.btn-ng {
+  margin-right: 25px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #00713d !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: #00713d !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: #00713d !important;
+}

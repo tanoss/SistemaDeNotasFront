@@ -1,0 +1,127 @@
+<div class="main-content">
+    <div class="card">
+        <div class="card-header card-header-danger">
+            <h4 class="card-title"><b>OPCIONES</b></h4>
+            <strong>
+                <p class="card-category"> Opciones existentes - ESPE</p>
+            </strong>
+        </div>
+        <div class="container-fluid">
+            <p></p>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field>
+                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+                    </mat-form-field>
+                    <div class="col-md-4">
+                            <a id="modal-77315" href="#modal-container-77315" role="button" class="btn" data-toggle="modal">
+                                <mat-icon aria-label="Edit">visibility</mat-icon>&nbsp; IMPORTANTE!!
+                            </a>
+    
+                            <div class="modal fade" id="modal-container-77315" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+    
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" style="text-align: center">
+                                            <strong>
+                                                Para Agregar OPCIONES, el SISTEMA debe estar ACTIVO</strong>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" style="text-align: center"
+                                                data-dismiss="modal">
+                                                CERRAR
+                                            </button>
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <div *ngIf="crear==1">
+                        <button mat-stroked-button color="primary" (click)="addOpcion()">
+                            <mat-icon>add</mat-icon>
+                            <span>Agregar</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-8"></div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <!-- <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8"> -->
+            <table mat-table [(dataSource)]="dataSource" matSort>
+                <ng-container matColumnDef="opcNombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre de la Opción </b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.opcNombre}} </td>
+                </ng-container>
+                <ng-container matColumnDef="segSistemas">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre del sistema</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.segSistemas.sisNombre}} </td>
+                </ng-container>
+                <ng-container matColumnDef="opcNivel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nivel</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.opcNivel}} </td>
+                </ng-container>
+                <ng-container matColumnDef="opcOrden">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Orden</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.opcOrden}} </td>
+                </ng-container>
+                <ng-container matColumnDef="opcUrl">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Url</b> </th>
+                    <td mat-cell *matCellDef="let element"> {{element.opcUrl}} </td>
+                </ng-container>
+                <ng-container matColumnDef="opciones">
+                    <th class="centre" mat-header-cell *matHeaderCellDef>
+                        <div *ngIf="editar==1||eliminar==1"> <b>Opciones</b> </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i=index;">
+                        <div class="row justify-content-center">
+                            <div *ngIf="editar==1">
+                                <button mat-icon-button color="primary" (click)="editarOpcion(element.opcId)">
+                                    <mat-icon aria-label="Edit">edit</mat-icon>
+                                </button>
+                            </div>
+                            <div *ngIf="eliminar==1">
+                                <button mat-icon-button color="warn"
+                                    (click)="eliminarOpcion(element.opcId, element.opcNombre)">
+                                    <mat-icon aria-label="Delete">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <!-- </div>
+                <div class="col-md-2">
+                </div>
+            </div> -->
+            <mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
+            </mat-error>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </div>
+</div>

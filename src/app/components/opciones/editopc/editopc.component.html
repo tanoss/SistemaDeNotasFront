@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Editar Opción</h2>
+<hr>
+<mat-dialog-content>
+    <form #editO="ngForm">
+        <div class="modificar">
+            <mat-form-field>
+                <mat-label class="texto">Nombre</mat-label>
+                <input matInput class="modnombre" [(ngModel)]="data.opcNombre" name="opcNombre" type="text"
+                    placeholder="Nombre de opción" #opcNombre="ngModel" required>
+                <mat-error *ngIf="opcNombre.hasError('required')">Nombre de opción requerida
+                </mat-error>
+            </mat-form-field>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label class="texto">Nivel</mat-label>
+                                    <input class="modnombre" matInput [(ngModel)]="data.opcNivel" name="opcNivel"
+                                        type="number" placeholder="Nivel" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <mat-label class="texto">Orden</mat-label>
+                                    <input class="modnombre" matInput [(ngModel)]="data.opcOrden" name="opcOrden"
+                                        type="number" placeholder="Orden" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <mat-form-field>
+                <mat-label class="texto">Url</mat-label>
+                <input matInput class="modnombre" [(ngModel)]="data.opcUrl" name="opcUrl" type="text"
+                    placeholder="Url de la opción" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label class="texto">Sistema al que pertenece</mat-label>
+                <input class="modificar" matInput [(value)]="data.segSistemas.sisNombre" name="pernombre" type="text"
+                    placeholder="Sistema al que pertenece" disabled>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center">
+    <button class="btn-ng" mat-stroked-button color="primary" (click)="cerrarModal()">Cancelar</button>
+    <button mat-stroked-button color="warn" [disabled]="editO.invalid" (click)="actualizarOpcion()">Actualizar</button>
+</mat-dialog-actions>

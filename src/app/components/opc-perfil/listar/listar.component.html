@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Opciones Permitidas</h2>
+
+<mat-dialog-content>
+    <form #forma="ngForm">
+        <mat-form-field>
+            <mat-chip-list [(ngModel)]="opcion.opcId" name="opcid">
+
+                <mat-chip *ngFor="let opciones of data" name="opcid"> {{opciones.opcion.opcNombre}}</mat-chip>
+
+            </mat-chip-list>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="cerrarModal()">Cancelar</button>
+</mat-dialog-actions>

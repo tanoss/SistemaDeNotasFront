@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>Editar Sistema</h2>
+<hr>
+<mat-dialog-content>
+    <form #editS="ngForm">
+        <mat-form-field>
+            <mat-label class="texto">Nombre</mat-label>
+            <input matInput [(ngModel)]="sistema.sisNombre" name="sisnombre" type="text"
+                placeholder="Nombre del Sistema" required minlength="4" #sisNombre="ngModel">
+            <mat-error *ngIf="sisNombre.hasError('required')">El nombre del sistema es requerido
+                ADMITIDOS*</mat-error>
+            <mat-error>Mínimo 4 letras</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label class="texto">Url</mat-label>
+            <input matInput [(ngModel)]="sistema.sisUrlSistema" name="sisurl" type="text" placeholder="Url del sistema"
+                required pattern="[a-zA-Z0-9]+(?:\.espe.edu.ec+)" title="FORMATO VALIDO: www.ejemplo.espe.edu.ec"
+                #sisUrl="ngModel">
+            <mat-error>Formato inválido<br>
+                Ejemplo: www.ejemplo.espe.edu.ec
+            </mat-error>
+        </mat-form-field>
+        <div *ngIf="data.sisEstado || data.sisEstado==true">
+            <mat-label>Estado actual:
+                <strong class="estado">
+                    Activo
+                </strong>
+            </mat-label>
+            <mat-form-field>
+                <mat-label>Cambiar estado</mat-label>
+                <mat-select [(ngModel)]="sistema.sisEstado" name="sisEstado" matNativeControl>
+                    <mat-option value="0">
+                        Inactivo
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="!data.sisEstado || data.sisEstado==false">
+            <mat-label>Estado actual:
+                <strong class="estado">
+                    Inactivo
+                </strong>
+            </mat-label>
+            <mat-form-field>
+                <mat-label>Cambiar estado</mat-label>
+                <mat-select [(ngModel)]="sistema.sisEstado" name="sisEstado" matNativeControl>
+                    <mat-option value="1">
+                        Activo
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions style="justify-content: center">
+    <button class="btn-ng" mat-stroked-button color="warn" (click)=" cerrarModal()">Cancelar</button>
+    <button mat-stroked-button color="primary" [disabled]="editS.invalid"
+        (click)="actualizarSistema()">Actualizar</button>
+</mat-dialog-actions>
