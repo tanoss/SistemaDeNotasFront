@@ -75,14 +75,14 @@ export class SidebarComponent implements OnInit {
           this.menuItems = [
             { path: '/profesores', title: 'Adm. profesores', icon: 'people', class: 'nav-pills-info' },
             { path: '/admestudiantes', title: 'Adm. Estudiantes', icon: 'people_outline', class: 'nav-pills-info' },
-            { path: '/adm_cursos', title: 'Adm. Cursos', icon: 'store', class: 'nav-pills-info' }
+            { path: '/adm_cursos', title: 'Adm. Cursos', icon: 'school', class: 'nav-pills-info' }
           ];
 
         } else if (data.idTipoUsuario === 2) {
           this.menuItems = [
             { path: '/adm_estudiantesp', title: 'Adm. Estudiantes', icon: 'people_outline', class: 'nav-pills-info' },
             { path: '/adm_materiasp', title: 'Adm. Materiasp', icon: 'library_books', class: 'nav-pills-info' },
-            { path: '/adm_cursosp', title: 'Adm. Cursos', icon: 'store', class: 'nav-pills-info' }
+            { path: '/adm_cursosp', title: 'Adm. Cursos', icon: 'school', class: 'nav-pills-info' }
           ];
         } else if (data.idTipoUsuario === 3) {
           this.menuItems = [
