@@ -18,7 +18,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <label class="card-category">Nombres</label>
-                  <p class="card-category">{{usuario.nombre}}</p>
+                  <p class="card-category"> {{usuario.nombre}} </p>
                 </div>
                 <div class="col-md-4">
                   <label class="card-category">Apellidos</label>
@@ -26,21 +26,25 @@
                 </div>
                 <div class="col-md-4">
                   <label class="card-category">Correo</label>
-                  <p class="card-category">{{usuario.correo}}</p>
+                
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.correo"  name="Correo" value="{{usuario.correo}}"> </p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
                   <label class="card-category">Direccion</label>
-                  <p class="card-category">{{usuario.direccion}}</p>
+                
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.direccion"  name="Direccion" value="{{usuario.direccion}}"> </p>
                 </div>
                 <div class="col-md-4">
                   <label class="card-category">Telefono Convencional</label>
-                  <p class="card-category">{{usuario.telefonoConvencional}}</p>
+                  
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoConvencional"  name="Convencional" value="{{usuario.telefonoConvencional}}" minlength="10" maxlength="12"> </p>
                 </div>
                 <div class="col-md-4">
                   <label class="card-category">Telefono Celular</label>
-                  <p class="card-category">{{usuario.telefonoCelular}}</p>
+                  
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoCelular"  name="telefonoCelular" value="{{usuario.telefonoCelular}}" minlength="10" maxlength="12" > </p>
                 </div>
               </div>
               <div class="row">
@@ -50,11 +54,24 @@
               <div class="row">
                 <div class="col-md-4">
                   <label class="card-category">Contacto de Emergencia</label>
-                  <p class="card-category">{{ usuario.referenciaPersNombre }}</p>
+                  
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersNombre"  name="nombreReferencia" value="{{usuario.referenciaPersNombre}}"> </p>
                 </div>
                 <div class="col-md-8">
                   <label class="card-category">Numero de Contacto de Emegencia</label>
-                  <p class="card-category"> {{usuario.referenciaPersTelf}} </p>
+                  
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersTelf"  name="telefonoReferencia" value="{{usuario.referenciaPersTelf}}" minlength="10" maxlength="12"> </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                  <button mat-stroked-button color="primary" (click)="actualizaper()">
+                      Actualizar  Información
+                  </button>
                 </div>
               </div>
             </form>

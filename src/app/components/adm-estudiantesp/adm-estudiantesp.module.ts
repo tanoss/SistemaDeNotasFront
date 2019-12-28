@@ -4,8 +4,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AdminLayoutRoutes } from "../../layouts/admin-layout/admin-layout.routing";
 import { MaterialModule } from "app/module/material.module";
-import { ProfesoresComponent } from 'app/components/profesores/profesores.component';
-
+import { AdmEstudiantespComponent } from 'app/components/adm-estudiantesp/adm-estudiantesp.component';
 @NgModule({
     imports: [
       CommonModule,
@@ -14,9 +13,10 @@ import { ProfesoresComponent } from 'app/components/profesores/profesores.compon
       ReactiveFormsModule,
       MaterialModule
     ],
-    declarations: [ProfesoresComponent],
+    declarations: [AdmEstudiantespComponent],
 
   })
+// tslint:disable-next-line: class-name
+export class admEstudiantespModule {
 
-
-export class ProfesoresModule {}
+}

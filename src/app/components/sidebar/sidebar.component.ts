@@ -73,18 +73,21 @@ export class SidebarComponent implements OnInit {
       data => {
         if (data.idTipoUsuario === 1) {
           this.menuItems = [
-            { path: '/sistemas', title: 'SISTEMAS', icon: 'apps', class: 'nav-pills-info' },
-            { path: '/perfiles', title: 'PERFILES', icon: 'format_list_bulleted', class: '' },
-            { path: '/opciones', title: 'OPCIONES', icon: 'toc', class: '' },
+            { path: '/profesores', title: 'Adm. profesores', icon: 'people', class: 'nav-pills-info' },
+            { path: '/admestudiantes', title: 'Adm. Estudiantes', icon: 'people_outline', class: 'nav-pills-info' },
+            { path: '/adm_cursos', title: 'Adm. Cursos', icon: 'store', class: 'nav-pills-info' }
           ];
 
         } else if (data.idTipoUsuario === 2) {
-          console.log('el rol es dos')
+          this.menuItems = [
+            { path: '/adm_estudiantesp', title: 'Adm. Estudiantes', icon: 'people_outline', class: 'nav-pills-info' },
+            { path: '/adm_materiasp', title: 'Adm. Materiasp', icon: 'library_books', class: 'nav-pills-info' },
+            { path: '/adm_cursosp', title: 'Adm. Cursos', icon: 'store', class: 'nav-pills-info' }
+          ];
         } else if (data.idTipoUsuario === 3) {
           this.menuItems = [
-            { path: '/opciones', title: 'OPCIONES', icon: 'toc', class: '' },
+            { path: '/calificaciones', title: 'Calificaciones', icon: 'spellcheck', class: 'nav-pills-info' }
           ];
-          console.log('el rol es tres')
         }
       }
     )
