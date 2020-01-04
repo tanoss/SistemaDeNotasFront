@@ -1,2 +1,2 @@
 # seg_adm_ng
-Sistema Gestion de Usuarios
+Sistema de Notas
