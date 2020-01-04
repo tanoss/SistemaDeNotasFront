@@ -8,13 +8,17 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
+                <li class="nav-item dropdown" tooltipPosition="left" >
+                    <a  class="text" tooltipPosition="left">
+                       Bienvenido:  {{ usuario.nombre }} {{ usuario.apellido }}
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
-                    <p class="card-category"> {{usuario.nombre}} </p>
-                    <p class="card-category">{{usuario.apellido}}</p>
                     <a routerLink="/perfil" class="nav-link" tooltipPosition="top">
                         <i class="material-icons">account_circle</i>
                     </a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a routerLink="/configuraciones" class="nav-link" tooltipPosition="top">
                         <i class="material-icons">settings</i>
