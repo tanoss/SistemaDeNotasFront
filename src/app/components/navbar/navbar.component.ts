@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewContainerRef } from "@angular/core";
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { ToastsManager } from "ng6-toastr";
+import { AuthService } from "app/service/auth.service";
+import { RestService } from "app/service/rest.service";
 
 @Component({
   selector: "app-navbar",
@@ -9,18 +11,26 @@ import { ToastsManager } from "ng6-toastr";
   styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit {
+  userPass: any;
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
 
+  usuario: any = {
+    nombre: ' ',
+    apellido: ' ',
+  };
+
   constructor(
     location: Location,
     private element: ElementRef,
     public toastService: ToastsManager,
     vcr: ViewContainerRef,
-    private router: Router
+    private router: Router,
+    private userToken: AuthService,
+    private rest: RestService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -28,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.user();
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName("navbar-toggler")[0];
     this.router.events.subscribe(event => {
@@ -133,10 +144,21 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     // location.replace('login');
-    this.toastService.success("", "Nos vemos !!");
+    this.toastService.success("", "Cerrando Sesión !!");
     setTimeout(() => {
       localStorage.removeItem("token");
       this.router.navigate(["/login"]);
     }, 1000);
   }
+
+  user() {
+    this.userPass = this.userToken.getUserToken();
+    this.rest.findRole(this.userPass.sub).subscribe(
+      data => {
+        this.usuario.nombre = data.nombre;
+        this.usuario.apellido = data.apellido;
+      }
+    )
+  }
+  
 }
