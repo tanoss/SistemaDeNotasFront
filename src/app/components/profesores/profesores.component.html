@@ -17,42 +17,46 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form role="form">
-                <div class="form-group">
-                   
-                  <label for="exampleInputEmail1">
-                    Email address
-                  </label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" />
-                </div>
-                <div class="form-group">
-                   
-                  <label for="exampleInputPassword1">
-                    Password
-                  </label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" />
-                </div>
-                <div class="form-group">
-                   
-                  <label for="exampleInputFile">
-                    File input
-                  </label>
-                  <input type="file" class="form-control-file" id="exampleInputFile" />
-                  <p class="help-block">
-                    Example block-level help text here.
-                  </p>
-                </div>
-                <div class="checkbox">
-                   
-                  <label>
-                    <input type="checkbox" /> Check me out
-                  </label>
-                </div> 
-              </form>
+							<div class="">
+								<label class="card-category">Cedula</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.cedula"  name="cedula" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Nombres</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.nombre"  name="nombre" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Apellidos</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.apellido"  name="apellido" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Correo</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.correo"  name="correo" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Direccion</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.direccion"  name="dirrecion" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Telefono Convencional</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoConvencional"  name="convencional" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Telefono Celular</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoCelular"  name="celular" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Referencia</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersNombre"  name="referencia" value=""> </p>
+							  </div>
+							  <div class="">
+								<label class="card-category">Referencia Telefono</label>
+								<p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersTelf"  name="referenciaTelefono" value=""> </p>
+							  </div>
 						</div>
 						<div class="modal-footer">
 							 
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" (click)="agregarprof()">
 								Crear
 							</button> 
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">

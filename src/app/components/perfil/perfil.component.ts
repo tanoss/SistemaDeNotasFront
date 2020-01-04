@@ -39,7 +39,6 @@ export class PerfilComponent implements OnInit {
     referenciaPersNombre: '',
     referenciaPersTelf: '',
     clave: ' '
-
   };
 
   perfil: any[] = [{}];
