@@ -18,7 +18,7 @@ export class RestService {
 
   // Funcion unica de consulta----------------------------------------
   getData(seg: String): Observable<any> {
-    return this.http.get<any>("/adm/" + seg).pipe(
+    return this.http.get<any>('/sdn/' + seg).pipe(
       map((data: any) => {
         return data;
       })
