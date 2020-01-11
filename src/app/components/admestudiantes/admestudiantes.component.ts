@@ -76,16 +76,10 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   }
   // tslint:disable-next-line: member-ordering
   usuario: any = {
-    idTipoUsuario: '3',
-    cedula: ' ',
     nombre: ' ',
-    apellido: ' ',
-    correo: '',
-    direccion: '',
-    telefonoConvencional: '',
-    telefonoCelular: '',
-    referenciaPersNombre: '',
-    referenciaPersTelf: ''
+    genero: ' ',
+    isb: '',
+    id_autor:""
   };
   // tslint:disable-next-line: member-ordering
   profesor: any[] = [];

@@ -10,3 +10,10 @@ export interface Persona {
     referenciaPersNombre?: string,
     referenciaPersTelf?: string
 }
+
+export interface libro {
+    id: number,
+    genero: string,
+    isb: string,
+    id_Autor: number
+}
