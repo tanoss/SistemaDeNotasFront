@@ -29,28 +29,28 @@
 										Cédula:
 									</label>
 									<input type="text" class="form-control" id="exampleInputCedula"
-										[(ngModel)]="usuario.cedula" name="cedula" required />
+										[(ngModel)]="usuario.cedula" name="cedula"  maxLength="11" required />
 								</div>
 								<div class="form-group">
 									<label for="exampleInputNombres">
 										Nombres:
 									</label>
 									<input [(ngModel)]="usuario.nombre" type="text" class="form-control"
-										id="exampleInputNombres" [(ngModel)]="usuario.nombre" name="nombre" required />
+										id="exampleInputNombres" [(ngModel)]="usuario.nombre" name="nombre" minLength="5" maxLength="25" required />
 								</div>
 								<div class="form-group">
 									<label for="exampleInputApellidos">
 										Apellidos:
 									</label>
 									<input [(ngModel)]="usuario.apellido" type="text" class="form-control"
-										id="exampleInputApellidos" [(ngModel)]="usuario.apellido" name="apellido"
+										id="exampleInputApellidos" [(ngModel)]="usuario.apellido" name="apellido" minLength="5" maxlength="30"
 										required />
 								</div>
 								<div class="form-group">
 									<label for="inputDireccion">
 										Dirección:
 									</label>
-									<input type="text" class="form-control" id="inputDireccion"
+									<input type="text" class="form-control" id="inputDireccion" maxlength="200"
 										[(ngModel)]="usuario.direccion" name="dirrecion" required />
 								</div>
 								<div class="form-group">
@@ -69,11 +69,11 @@
 									<div class="row">
 										<div class="col-md-6">
 											<input type="text" class="form-control" id="inputTelefono"
-												[(ngModel)]="usuario.telefonoConvencional" name="convencional"
+												[(ngModel)]="usuario.telefonoConvencional" name="convencional" maxLength="10"
 												required />
 										</div>
 										<div class="col-md-6">
-											<input type="text" class="form-control" id="inputTelefono2"
+											<input type="text" class="form-control" id="inputTelefono2"  maxLength="10"
 												[(ngModel)]="usuario.telefonoCelular" name="celular" />
 										</div>
 									</div>
@@ -91,7 +91,7 @@
 									<label for="inputRefNombre">
 										Nombre de Contacto de Emergencia:
 									</label>
-									<input type="email" class="form-control" id="inputRefNombre" name="refNombre"
+									<input type="text" class="form-control" id="inputRefNombre" name="refNombre" minLength="3" maxLength="20"
 										[(ngModel)]="usuario.referenciaPersNombre" required />
 								</div>
 
@@ -99,7 +99,7 @@
 									<label for="inputRefNumero">
 										Numero de contacto de Emergencia:
 									</label>
-									<input type="email" class="form-control" id="inputRefNumero"
+									<input type="number" class="form-control" id="inputRefNumero" minLength="9" maxLength="11"
 										[(ngModel)]="usuario.referenciaPersTelf" name="refnumero" required />
 								</div>
 							</form>
