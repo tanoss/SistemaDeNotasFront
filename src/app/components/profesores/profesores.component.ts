@@ -11,6 +11,16 @@ import {
 } from '@angular/material';
 import { ToastsManager } from 'ng6-toastr';
 import { Persona } from 'app/interfaces/persona.interface';
+// validar input
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+export class InputEmail implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-profesores',
@@ -22,6 +32,16 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   public displayedColumns = ['cedula', 'nombres', 'apellidos' ,'correo' ,'direccion' ,'telefonoConvencional' ,'telefonoCelular' ,'referenciaPersNombre' ,'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
 
+  /// validatr input
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  matcher = new InputEmail();
+  
+
+  // paginacion
   setPaginator() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -101,12 +121,23 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     console.log(this.usuario);
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
-        console.log('se agrefgo');
-      }, error => {
-        console.log(error)
+        if (data){
+        this.toastService.success( "Profesor Agregado");
+        console.log('Profesor Agregado');
+      }else {
+        this.toastService.info(
+          data.message,
+          "Profesor no agregado",
+        );
       }
-    )
-  }
+    },
+      error => {
+        this.toastService.error(
+          "Vuelva a intertarlo",
+          "Error de conexión !");
+        }
+    );
+}
   cargarprofesores() {
     this.apiService.getData('allprof').subscribe(
       data => {
