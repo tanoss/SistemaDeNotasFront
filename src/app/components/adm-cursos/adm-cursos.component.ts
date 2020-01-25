@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../service/rest.service';
+import { ConstantPool } from '@angular/compiler';
 
 
 export interface PeriodicElement {
@@ -8,6 +9,8 @@ export interface PeriodicElement {
   weight: string;
   symbol: string;
 }
+
+
 
 export interface Food {
   value: string;
@@ -31,12 +34,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class AdmCursosComponent implements OnInit {
 
+  paralelo: any = {
+    paralelo: '',
+  };
 
+  grado: any = {
+    paralelo: '',
+  };
 
   constructor(private servicio: RestService) { }
 
   ngOnInit() {
   }
+  
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
@@ -46,12 +57,15 @@ export class AdmCursosComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
 
-  paralelo: any = {
-    paralelo: '',
-  };
+  
 
 
   creargrado() {
+    this.servicio.addData(this.grado, 'gradoadd').subscribe(
+      data => {
+        console.log(data);
+      }
+    )
 
   }
  mensaje: any;
