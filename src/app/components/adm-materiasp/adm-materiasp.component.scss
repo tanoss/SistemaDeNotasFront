@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+  }
+  
+  .centre {
+    text-align: center;
+  }
+  .alert.gris {
+    // border: 1px solid #999;
+    // border-left: 0;
+    // border-right: 0;
+    color: #555;
+    display: block;
+    margin-top: 20px;
+    padding: 8px 0;
+    text-align: center;
+  }
+  
+  .example-button {
+    margin-top: 0px;
+  }
+  
+  .example-tooltip-red {
+    background:orange;
+  }
+  

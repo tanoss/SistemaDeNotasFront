@@ -15,6 +15,7 @@ import { LoginComponent } from "./login/login.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthGuard } from "./auth/auth.guard";
 import { ToastModule } from "ng6-toastr";
+//import { bootstrap } from 'bootstrap';
 
 @NgModule({
   imports: [

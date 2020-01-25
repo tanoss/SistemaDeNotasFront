@@ -1,169 +1,57 @@
 <br>
 <br>
+<div class="row">
+
+  <div class="col-md-4">
+    <label>Curso:septimo</label>
+  </div>
+  <div class="col-md-4">
+    <Label>Paralelo:B</Label>
+  </div>
+
+  <div class="col-md-4">
+    <Label>      Profesor:Luis Gualavisi</Label>
+  </div>
+  
+</div>
+
 <div class="container-fluid">
   <div class="row">
+
     <div class="col-md-12">
-      <a id="modal-599445" href="#modal-container-5994451" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Crear Libro
-      </a>
-      <div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Crear Libro
-              </h5>
-              <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form role="form">
-                <div class="form-group">
-                  <label for="exampleInputCedula">
-                    Nombre del libro:
-                  </label>
-                  <input type="text" class="form-control" id="exampleInputCedula" [(ngModel)]="usuario.nombre"
-                    name="cedula" required />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputNombres">
-                    Genero del libro:
-                  </label>
-                  <input [(ngModel)]="usuario.genero" type="text" class="form-control" id="exampleInputNombres"
-                    [(ngModel)]="usuario.genero" name="nombre" required />
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputApellidos">
-                    Isb:
-                  </label>
-                  <input [(ngModel)]="usuario.isb" type="text" class="form-control" id="exampleInputApellidos"
-                    [(ngModel)]="usuario.isb" name="apellido" required />
-                </div>
-                <div class="form-group">
-                  <label for="inputDireccion">
-                    Autor:
-                  </label>
-                  <input type="text" class="form-control" id="inputDireccion" [(ngModel)]="usuario.id_autor"
-                    name="dirrecion" required />
-                </div>
-                
-              </form>
-            </div>
-            <div class="modal-footer">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-              <button type="button" class="btn btn-info" (click)="agregarprof()" data-dismiss="modal">
-                <mat-icon>person_add</mat-icon> Agregar
-              </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
-                <mat-icon>remove</mat-icon> Cancelar
-              </button>
-            </div>
-          </div>
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
 
-        </div>
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
 
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-10">
-          <!-- <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Cédula</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Dirección</th>
-                <th scope="col">Teléfono Convencional</th>
-                <th scope="col">Teléfono Celular</th>
-                <th scope="col">Correo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> -->
-        <div class="col-md-1">
-        </div>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>MATERIA </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
 
-      </div>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Nota 1 </th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Nota 2 </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
-  </div>
-</div>
-<br>
 
-			<div class="container-fluid">
-				<div class="row">
-					
-					<div class="col-md-12">
-						<table mat-table [(dataSource)]="dataSource" matSort>
-							<ng-container matColumnDef="cedula">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre</b>
-								</th>
-								<td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-							</ng-container>
-							<ng-container matColumnDef="nombres">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>genero</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.genero}} </td>
-							</ng-container>
-							<ng-container matColumnDef="apellidos">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>SBN</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.isb}} </td>
-							</ng-container>
-							<ng-container matColumnDef="correo">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Autor</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.estudiante.nombre}} </td>
-							</ng-container>
-							<ng-container matColumnDef="direccion">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Direccion</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
-							</ng-container>
-							<ng-container matColumnDef="telefonoConvencional">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Convencional</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.telefonoConvencional}} </td>
-							</ng-container>
-							<ng-container matColumnDef="telefonoCelular">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Celular</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.telefonoCelular}} </td>
-							</ng-container>
-							<ng-container matColumnDef="referenciaPersNombre">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Nombre</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.referenciaPersNombre}} </td>
-							</ng-container>
-							<ng-container matColumnDef="referenciaPersTelf">
-								<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Telefono</b> </th>
-								<td mat-cell *matCellDef="let element"> {{element.referenciaPersTelf}} </td>
-							</ng-container>
-							<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-							<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-						</table>
-					</div>
-					
-				</div>
-			</div>
-			<mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
-			</mat-error>
-			<mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
-			</mat-paginator>
+  </div>
+  </ div>

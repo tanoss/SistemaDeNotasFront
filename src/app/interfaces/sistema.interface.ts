@@ -11,7 +11,7 @@ export interface SistemaListData {
 }
 
 export interface SistemasData1 {
-  sisId: number;
+  sisId?: number;
   sisNombre: string;
   sisUrlSistema: string;
   sis_estado: boolean;
