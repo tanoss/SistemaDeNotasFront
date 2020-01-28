@@ -5,19 +5,13 @@
       <a id="modal-599445" href="#modal-grado" role="button" class="btn btn-success" data-toggle="modal">
         <mat-icon>person_add</mat-icon> Crear Grado
       </a>
-    </div>
-  
-    <div class="col-md-4">
-      <a id="modal-599445" href="#modal-grado" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Crear Paralelo
-      </a>
-      <div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+      
+      <div class="modal fade" id="modal-grado" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Asignar profesor al curso
+                <mat-icon>person_add</mat-icon> Crear Grado
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
@@ -29,7 +23,55 @@
                   <label for="inputCorreo">
                     Letra:
                   </label>
-                  <input type="text" class="form-control" id="letra" [(ngModel)]="paralelo.paralelo" name="Letra"
+                  <input type="text" class="form-control" id="gras" [(ngModel)]="grado.grado" name="Letra2" required />
+                </div>
+                <div class="form-group">
+                  <label for="inputs">
+                    Nombre Grado:
+                  </label>
+                  <input type="text" class="form-control" id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3"
+                    required />
+                </div>
+
+              </form>
+
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-info" (click)="creargrado()" data-dismiss="modal">
+                <mat-icon>person_add</mat-icon> Agregar
+              </button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                <mat-icon>remove</mat-icon> Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <a id="modal-59944" href="#modal-paralelo" role="button" class="btn btn-success" data-toggle="modal">
+        <mat-icon>person_add</mat-icon> Crear Paralelo
+      </a>
+      <div class="modal fade" id="modal-paralelo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">
+                <mat-icon>person_add</mat-icon> Crear Paralelo
+              </h5>
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form">
+                <div class="form-group">
+                  <label for="inputCorreo">
+                    Letra:
+                  </label>
+                  <input type="text" class="form-control" id="paralelo" [(ngModel)]="paralelo.paralelo" name="Letra4"
                     required />
                 </div>
 
@@ -50,37 +92,52 @@
       </div>
     </div>
     <div class="col-md-4">
-      <a id="modal-599445" href="#modal-pg" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Asignar Grado Paralelo
+      <a id="modal-5994" href="#modal-pg" role="button" class="btn btn-success" data-toggle="modal">
+        <mat-icon>person_add</mat-icon> Asignar Grado
       </a>
-      <div class="modal fade" id="modal-pg" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+      <div class="modal fade" id="modal-pg" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Asignar profesor al curso
+                <mat-icon>person_add</mat-icon> Asignar Grado
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
             <div class="modal-body">
-              <form role="form">
-                <div class="form-group">
-                  <label for="inputCorreo">
-                    Letra:
-                  </label>
-                  <input type="text" class="form-control" id="letra" [(ngModel)]="paralelo.paralelo" name="Letra"
-                    required />
-                </div>
+              <mat-form-field>
+                <mat-label>Seleccione Un Grado</mat-label>
+                <mat-select [(ngModel)]="grado.idGrado" name="sisop">
+                  <mat-option *ngFor="let grado of grados" value="{{grado.idGrado}}"
+                    >
+                    {{grado.nombreGrado}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
-              </form>
+              <mat-form-field>
+                <mat-label>Seleccione Un Paralelo</mat-label>
+                <mat-select [(ngModel)]="paralelo.idParalelo" name="par">
+                  <mat-option *ngFor="let paralelo of paralelos1" value="{{paralelo.idParalelo}}"
+                    >
+                    {{paralelo.paralelo}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- <select type="number" [(ngModel)]="selectedValue">
+                <option *ngFor="let grado of grados" [ngValue]="c">{{grado.nombreGrado}}</option>
+              </select> -->
+
+             
+
 
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-info" (click)="crearparalelo()" data-dismiss="modal">
+              <button type="button" class="btn btn-info" (click)="creargradop(grado.idGrado,paralelo.idParalelo)" data-dismiss="modal">
                 <mat-icon>person_add</mat-icon> Agregar
               </button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">

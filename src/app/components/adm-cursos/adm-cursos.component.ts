@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { RestService } from '../../service/rest.service';
 import { ConstantPool } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 export interface PeriodicElement {
@@ -36,17 +37,29 @@ export class AdmCursosComponent implements OnInit {
 
   paralelo: any = {
     paralelo: '',
+
   };
 
+  paralelos1: any;
+
   grado: any = {
-    paralelo: '',
+    grado: '',
+    nombreGrado: ''
+  };
+
+  grados: any;
+  gp: any = {
+    idGrado: '',
+    idParalelo: ''
   };
 
   constructor(private servicio: RestService) { }
 
   ngOnInit() {
+    this.listargrados();
+    this.listarparalelos();
   }
-  
+
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
@@ -57,32 +70,65 @@ export class AdmCursosComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
 
-  
 
+  
+  listargrados() {
+    this.servicio.getData('grado').subscribe(
+      data => {
+        console.log(data);
+        this.grados = data;
+      }
+    )
+  }
+
+  listarparalelos() {
+    this.servicio.getData('paralelo').subscribe(
+      data => {
+        this.paralelos1 = data;
+      }
+    )
+  }
 
   creargrado() {
+    console.log(this.grado);
     this.servicio.addData(this.grado, 'gradoadd').subscribe(
       data => {
+        this.mensaje = data
         console.log(data);
       }
     )
-
+      this.listargrados();
   }
- mensaje: any;
+  mensaje: any;
 
   crearparalelo() {
-     this.servicio.addData(this.paralelo, 'paraleloadd').subscribe(
-       data => {
+    this.servicio.addData(this.paralelo, 'paraleloadd').subscribe(
+      data => {
         this.mensaje = data
         console.log(this.mensaje)
-       }
-     )
-    
+        console.log(this.paralelo)
+      }
+    )
+    this.listarparalelos();
   }
 
-  creargradop() {
-
-
+  creargradop(grado: number, paralelo: number) {
+    console.log(grado, paralelo );
+    this.gp = {
+       gradoId: grado,
+      paraleloId: paralelo
+    }
+    this.creargradopa();
+  }
+  response: any;
+  creargradopa() {
+    
+    this.servicio.addData(this.gp, 'gradopadd').subscribe(
+      data => {
+        this.response = data;
+        console.log(this.response);
+      }
+    )
   }
 
 }

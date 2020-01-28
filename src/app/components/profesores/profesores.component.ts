@@ -124,6 +124,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
         if (data){
         this.toastService.success( "Profesor Agregado");
         console.log('Profesor Agregado');
+        console.log(data);
       }else {
         this.toastService.info(
           data.message,

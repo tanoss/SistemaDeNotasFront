@@ -23,7 +23,9 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
               "src/assets/css/demo.css",
-              "node_modules/ng6-toastr/ng2-toastr.css"
+              "node_modules/ng6-toastr/ng2-toastr.css",
+              "src/styles.css"
+             
 
             ],
             "scripts": [
