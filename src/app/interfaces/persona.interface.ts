@@ -11,9 +11,8 @@ export interface Persona {
     referenciaPersTelf?: string
 }
 
-export interface libro {
-    id: number,
-    genero: string,
-    isb: string,
-    id_Autor: number
+export interface Grado {
+    idGradoParalelo: number,
+    idGrado: number,
+    idParalelo: number,
 }

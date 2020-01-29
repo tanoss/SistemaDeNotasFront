@@ -12,8 +12,8 @@ import {
 import { ToastsManager } from 'ng6-toastr';
 import { Persona } from 'app/interfaces/persona.interface';
 // validar input
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 export class InputEmail implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -28,8 +28,9 @@ export class InputEmail implements ErrorStateMatcher {
   styleUrls: ['./profesores.component.scss'],
 })
 export class ProfesoresComponent implements OnInit, AfterViewInit {
+  public data: any;
   public mostrarMensajeFiltro: boolean;
-  public displayedColumns = ['cedula', 'nombres', 'apellidos' ,'correo' ,'direccion' ,'telefonoConvencional' ,'telefonoCelular' ,'referenciaPersNombre' ,'referenciaPersTelf'];
+  public displayedColumns = ['cedula', 'nombres', 'apellidos', 'correo', 'direccion', 'telefonoConvencional', 'telefonoCelular', 'referenciaPersNombre', 'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
 
   /// validatr input
@@ -39,7 +40,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   ]);
 
   matcher = new InputEmail();
-  
+
 
   // paginacion
   setPaginator() {
@@ -116,29 +117,31 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line: member-ordering
   profesor: any[] = [];
-  public data: any;
+
   agregarprof() {
     console.log(this.usuario);
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
-        if (data){
-        this.toastService.success( "Profesor Agregado");
-        console.log('Profesor Agregado');
-        console.log(data);
-      }else {
-        this.toastService.info(
-          data.message,
-          "Profesor no agregado",
-        );
-      }
-    },
+        if (data) {
+          this.toastService.success("Profesor Agregado");
+          console.log('Profesor Agregado');
+          console.log(data);
+          this.cargarprofesores();
+        } else {
+          this.toastService.info(
+            data.message,
+            "Profesor no agregado",
+          );
+        }
+      },
       error => {
         this.toastService.error(
           "Vuelva a intertarlo",
           "Error de conexión !");
-        }
+      }
     );
-}
+    
+  }
   cargarprofesores() {
     this.apiService.getData('allprof').subscribe(
       data => {

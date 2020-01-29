@@ -1,7 +1,7 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RestService } from 'app/service/rest.service';
-import { Persona, libro } from 'app/interfaces/persona.interface';
+import { Persona} from 'app/interfaces/persona.interface';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ToastsManager } from 'ng6-toastr';
 

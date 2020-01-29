@@ -1,107 +1,119 @@
-		<br>
-		<br>
-		<div class="container-fluid">
-		  <div class="row">
-			<div class="col-md-12">
-			  <a id="modal-599445" href="#modal-container-5994451" role="button" class="btn btn-success" data-toggle="modal">
+<br>
+<br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<a id="modal-599445" href="#modal-container-5994451" role="button" class="btn btn-success"
+				data-toggle="modal">
 				<mat-icon>person_add</mat-icon> Crear Profesor
-			  </a>
-			  <div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel"
+			</a>
+			<div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog" role="document">
-				  <div class="modal-content">
-					<div class="modal-header">
-					  <h5 class="modal-title" id="myModalLabel">
-						<mat-icon>person_add</mat-icon> Crear Profesor
-					  </h5>
-					  <button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span>
-					  </button>
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								<mat-icon>person_add</mat-icon> Crear Profesor
+							</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form role="form">
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese N° de Cédula" type="number" name="cedula"
+											[(ngModel)]="usuario.cedula" />
+									</mat-form-field>
+								</div>
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese Nombres" name="nombre"
+											[(ngModel)]="usuario.nombre" />
+									</mat-form-field>
+								</div>
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese Apellidos" name="apellido"
+											[(ngModel)]="usuario.apellido" />
+									</mat-form-field>
+								</div>
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese Dirección" name="direccion"
+											[(ngModel)]="usuario.direccion" />
+									</mat-form-field>
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<input matInput placeholder="Ingrese N° Convencional"
+													name="convencional" type="number"
+													[(ngModel)]="usuario.telefonoConvencional" />
+											</mat-form-field>
+										</div>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<input matInput placeholder="Ingrese N° Celular" type="number"
+													name="celular" [(ngModel)]="usuario.telefonoCelular" />
+											</mat-form-field>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese Correo Electrónico" name="correo"
+											[formControl]="emailFormControl" [errorStateMatcher]="matcher"
+											[(ngModel)]="usuario.correo">
+
+										<mat-error
+											*ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+											Por favor ingrese correo válido
+										</mat-error>
+										<mat-error *ngIf="emailFormControl.hasError('required')">
+											Correo debe tener <strong>@</strong>
+										</mat-error>
+									</mat-form-field>
+								</div>
+
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese Nombre de Contacto" name="nombrecontacto"
+											[(ngModel)]="usuario.referenciaPersNombre" />
+									</mat-form-field>
+								</div>
+
+								<div class="form-group">
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Ingrese N° de Contacto" type="number"
+											name="numerocontacto" [(ngModel)]="usuario.referenciaPersTelf" />
+									</mat-form-field>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+
+							<button type="button" class="btn btn-info" (click)="agregarprof()" data-dismiss="modal">
+								<mat-icon>person_add</mat-icon> Agregar
+							</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">
+								<mat-icon>remove</mat-icon> Cancelar
+							</button>
+						</div>
 					</div>
-					<div class="modal-body">
-					  <form role="form">
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese N° de Cédula" type="number" name="cedula" [(ngModel)]="usuario.cedula"/>
-							  </mat-form-field>
-						</div>
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese Nombres" name="nombre" [(ngModel)]="usuario.nombre"/>
-							  </mat-form-field>
-						</div>
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese Apellidos" name="apellido" [(ngModel)]="usuario.apellido"/>
-							  </mat-form-field>
-						</div>
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese Dirección" name="direccion" [(ngModel)]="usuario.direccion"/>
-							</mat-form-field>
-						</div>
-						<div class="form-group">
-						  <div class="row">
-							<div class="col-md-6">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Ingrese N° Convencional" name="convencional" type="number"  [(ngModel)]="usuario.telefonoConvencional"/>
-								  </mat-form-field>
-							</div>
-							<div class="col-md-6">
-								<mat-form-field class="example-full-width">
-									<input matInput placeholder="Ingrese N° Celular" type="number" name="celular"  [(ngModel)]="usuario.telefonoCelular"/>
-								</mat-form-field>
-							</div>
-						  </div>
-						</div>
-		
-						<div class="form-group">
-						  <mat-form-field class="example-full-width">
-							<input matInput placeholder="Ingrese Correo Electrónico" name="correo" [formControl]="emailFormControl"
-								   [errorStateMatcher]="matcher" [(ngModel)]="usuario.correo">
-							
-							<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-							  Por favor ingrese correo válido
-							</mat-error>
-							<mat-error *ngIf="emailFormControl.hasError('required')">
-							  Correo debe tener <strong>@</strong>
-							</mat-error>
-						  </mat-form-field>
-						</div>
-		
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese Nombre de Contacto" name="nombrecontacto" [(ngModel)]="usuario.referenciaPersNombre"/>
-							  </mat-form-field>
-						</div>
-		
-						<div class="form-group">
-							<mat-form-field class="example-full-width">
-								<input matInput placeholder="Ingrese N° de Contacto" type="number" name="numerocontacto" [(ngModel)]="usuario.referenciaPersTelf"/>
-							  </mat-form-field>
-						</div>
-					  </form>
-					</div>
-					<div class="modal-footer">
-		
-					  <button type="button" class="btn btn-info" (click)="agregarprof()" data-dismiss="modal">
-						<mat-icon>person_add</mat-icon> Agregar
-					  </button>
-					  <button type="button" class="btn btn-danger" data-dismiss="modal">
-						<mat-icon>remove</mat-icon> Cancelar
-					  </button>
-					</div>
-				  </div>
-		
+
 				</div>
-		
-			  </div>
-			  <br>
-			  <div class="row">
+
+			</div>
+			<br>
+			<div class="row">
 				<div class="col-md-1">
 				</div>
 				<div class="col-md-10">
-				  <!-- <table class="table table-striped">
+					<!-- <table class="table table-striped">
 					<thead>
 					  <tr>
 						<th scope="col">Id</th>
@@ -136,65 +148,75 @@
 					</tbody>
 				  </table>
 				</div> -->
-				<div class="col-md-1">
-				</div>
-		
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<br>
-		
-					<div class="container-fluid">
-						<div class="row">
-							
-							<div class="col-md-12">
-								<table mat-table [(dataSource)]="dataSource" matSort>
-									<ng-container matColumnDef="cedula">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cedula</b>
-										</th>
-										<td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
-									</ng-container>
-									<ng-container matColumnDef="nombres">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombres</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-									</ng-container>
-									<ng-container matColumnDef="apellidos">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Apellidos</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
-									</ng-container>
-									<ng-container matColumnDef="correo">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Correo</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.correo}} </td>
-									</ng-container>
-									<ng-container matColumnDef="direccion">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Direccion</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
-									</ng-container>
-									<ng-container matColumnDef="telefonoConvencional">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Convencional</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.telefonoConvencional}} </td>
-									</ng-container>
-									<ng-container matColumnDef="telefonoCelular">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Celular</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.telefonoCelular}} </td>
-									</ng-container>
-									<ng-container matColumnDef="referenciaPersNombre">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Nombre</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.referenciaPersNombre}} </td>
-									</ng-container>
-									<ng-container matColumnDef="referenciaPersTelf">
-										<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Telefono</b> </th>
-										<td mat-cell *matCellDef="let element"> {{element.referenciaPersTelf}} </td>
-									</ng-container>
-									<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-									<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-								</table>
-							</div>
-							
-						</div>
+					<div class="col-md-1">
 					</div>
-					<mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
-					</mat-error>
-					<mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
-					</mat-paginator>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<mat-form-field>
+					<input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+				</mat-form-field>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div class="row">
+
+			<div class="col-md-12">
+
+				<table mat-table [(dataSource)]="dataSource" matSort>
+					<ng-container matColumnDef="cedula">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cedula</b>
+						</th>
+						<td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+					</ng-container>
+					<ng-container matColumnDef="nombres">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombres</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+					</ng-container>
+					<ng-container matColumnDef="apellidos">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Apellidos</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+					</ng-container>
+					<ng-container matColumnDef="correo">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Correo</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+					</ng-container>
+					<ng-container matColumnDef="direccion">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Direccion</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+					</ng-container>
+					<ng-container matColumnDef="telefonoConvencional">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Convencional</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.telefonoConvencional}} </td>
+					</ng-container>
+					<ng-container matColumnDef="telefonoCelular">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>T. Celular</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.telefonoCelular}} </td>
+					</ng-container>
+					<ng-container matColumnDef="referenciaPersNombre">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Nombre</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.referenciaPersNombre}} </td>
+					</ng-container>
+					<ng-container matColumnDef="referenciaPersTelf">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>R. Telefono</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.referenciaPersTelf}} </td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
+	</mat-error>
+	<mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
+	</mat-paginator>

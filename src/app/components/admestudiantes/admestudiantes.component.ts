@@ -76,10 +76,16 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   }
   // tslint:disable-next-line: member-ordering
   usuario: any = {
+    idTipoUsuario: '3',
+    cedula: ' ',
     nombre: ' ',
-    genero: ' ',
-    isb: '',
-    id_autor:""
+    apellido: ' ',
+    correo: '',
+    direccion: '',
+    telefonoConvencional: '',
+    telefonoCelular: '',
+    referenciaPersNombre: '',
+    referenciaPersTelf: ''
   };
   // tslint:disable-next-line: member-ordering
   profesor: any[] = [];
@@ -90,6 +96,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
     this.apiService.addData( this.usuario, 'addperson').subscribe(
       data => {
         console.log('se agrego');
+        this.cargarestudiantes();
       }, error => {
         console.log(error)
       }
