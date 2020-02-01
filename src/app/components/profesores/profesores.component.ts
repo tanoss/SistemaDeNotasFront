@@ -38,7 +38,8 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     Validators.required,
     Validators.email,
   ]);
-
+ 
+  
   matcher = new InputEmail();
 
 
@@ -104,9 +105,9 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: member-ordering
   usuario: any = {
     idTipoUsuario: '2',
-    cedula: ' ',
-    nombre: ' ',
-    apellido: ' ',
+    cedula: '',
+    nombre: '',
+    apellido: '',
     correo: '',
     direccion: '',
     telefonoConvencional: '',

@@ -20,17 +20,15 @@
             <div class="modal-body">
               <form role="form">
                 <div class="form-group">
-                  <label for="inputCorreo">
-                    Letra:
-                  </label>
-                  <input type="text" class="form-control" id="gras" [(ngModel)]="grado.grado" name="Letra2" required />
+                  <mat-form-field class="example-full-width">
+										<input matInput placeholder="Curso" type="number"  id="curso" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2" />
+									</mat-form-field>
                 </div>
                 <div class="form-group">
-                  <label for="inputs">
-                    Nombre Grado:
-                  </label>
-                  <input type="text" class="form-control" id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3"
-                    required />
+                  <mat-form-field class="example-full-width">
+										<input matInput placeholder="Nombre Curso" type="text"  id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3" required />
+									</mat-form-field>
+                  
                 </div>
 
               </form>
@@ -68,11 +66,10 @@
             <div class="modal-body">
               <form role="form">
                 <div class="form-group">
-                  <label for="inputCorreo">
-                    Letra:
-                  </label>
-                  <input type="text" class="form-control" id="paralelo" [(ngModel)]="paralelo.paralelo" name="Letra4"
-                    required />
+                  <mat-form-field class="example-full-width">
+										<input matInput placeholder="Paralelo" type="number"  id="paralelo" [(ngModel)]="paralelo.paralelo" name="Letra4" required maxlength="2" />
+									</mat-form-field>
+               
                 </div>
 
               </form>
@@ -100,7 +97,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Asignar Grado
+                <mat-icon>person_add</mat-icon> Asignar Curso-Paralelo
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
@@ -108,7 +105,7 @@
             </div>
             <div class="modal-body">
               <mat-form-field>
-                <mat-label>Seleccione Un Grado</mat-label>
+                <mat-label>Seleccione Grado</mat-label>
                 <mat-select [(ngModel)]="grado.idGrado" name="sisop">
                   <mat-option *ngFor="let grado of grados" value="{{grado.idGrado}}"
                     >
@@ -118,7 +115,7 @@
               </mat-form-field>
 
               <mat-form-field>
-                <mat-label>Seleccione Un Paralelo</mat-label>
+                <mat-label>Seleccione Paralelo</mat-label>
                 <mat-select [(ngModel)]="paralelo.idParalelo" name="par">
                   <mat-option *ngFor="let paralelo of paralelos1" value="{{paralelo.idParalelo}}"
                     >
@@ -169,16 +166,16 @@
 
       <table mat-table [(dataSource)]="dataSource" matSort>
         <ng-container matColumnDef="cedula">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cedula</b>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Curso</b>
           </th>
           <td mat-cell *matCellDef="let element"> {{element.idGradoParalelo}} </td>
         </ng-container>
         <ng-container matColumnDef="nombres">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombres</b> </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre Curso</b> </th>
           <td mat-cell *matCellDef="let element"> {{element.grado.nombreGrado}} </td>
         </ng-container>
         <ng-container matColumnDef="apellidos">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Apellidos</b> </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Paralelo</b> </th>
           <td mat-cell *matCellDef="let element"> {{element.paralelo.paralelo}} </td>
         </ng-container>
         
