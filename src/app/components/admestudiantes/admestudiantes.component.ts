@@ -1,19 +1,40 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RestService } from 'app/service/rest.service';
 import { Persona } from 'app/interfaces/persona.interface';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator,MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ToastsManager } from 'ng6-toastr';
+import { FormControl, FormGroupDirective, NgForm, Validators,FormBuilder, FormGroup } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
+
+export class InputEmail implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-admestudiantes',
   templateUrl: './admestudiantes.component.html',
   styleUrls: ['./admestudiantes.component.scss']
 })
 export class AdmestudiantesComponent implements OnInit, AfterViewInit {
+  public data: any;
   public mostrarMensajeFiltro: boolean;
   public displayedColumns = ['cedula', 'nombres', 'apellidos' ,'correo' ,'direccion' ,'telefonoConvencional' ,'telefonoCelular' ,'referenciaPersNombre' ,'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
 
+    /// validatr input
+    emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    matcher = new InputEmail();
+    options: any = {
+      toastLife: 3000,
+      dismiss: "auto",
+      showCloseButton: true
+    };
   setPaginator() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -58,7 +79,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   constructor(private apiService: RestService,
     public toastService: ToastsManager,
-    vcr: ViewContainerRef,
+    vcr: ViewContainerRef,private formBuilder: FormBuilder
   ) {
     this.toastService.setRootViewContainerRef(vcr);
   }
@@ -89,18 +110,31 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   };
   // tslint:disable-next-line: member-ordering
   profesor: any[] = [];
-  public data: any;
+  
 
   agregarprof() {
     console.log(this.usuario);
     this.apiService.addData( this.usuario, 'addperson').subscribe(
       data => {
-        console.log('se agrego');
-        this.cargarestudiantes();
-      }, error => {
-        console.log(error)
+        if (data) {
+          this.toastService.success("","Estudiante Agregado");
+          console.log(data);
+          this.cargarestudiantes();
+        } else {
+          this.toastService.info(
+            data.message,
+            "Estudiante no agregado",
+            this.options
+          );
+        }
+      },
+      error => {
+        this.toastService.error(
+          "Vuelva a intertarlo",
+          "Datos NO Estudiante !");
+          this.options
       }
-    )
+    );
   }
 
   cargarestudiantes() {

@@ -12,7 +12,7 @@ import {
 import { ToastsManager } from 'ng6-toastr';
 import { Persona } from 'app/interfaces/persona.interface';
 // validar input
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators,FormBuilder, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class InputEmail implements ErrorStateMatcher {
@@ -33,13 +33,18 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   public displayedColumns = ['cedula', 'nombres', 'apellidos', 'correo', 'direccion', 'telefonoConvencional', 'telefonoCelular', 'referenciaPersNombre', 'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
 
+
   /// validatr input
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
  
-  
+  options: any = {
+    toastLife: 3000,
+    dismiss: "auto",
+    showCloseButton: true
+  };
   matcher = new InputEmail();
 
 
@@ -88,20 +93,31 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   constructor(private apiService: RestService,
     public toastService: ToastsManager,
-    vcr: ViewContainerRef,
+    vcr: ViewContainerRef,private formBuilder: FormBuilder
   ) {
     this.toastService.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
     this.cargarprofesores();
-  }
+  //   this.profesors =this.formBuilder.group({
+  //     cedula: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],            
+  //     nombres: ['', [Validators.required,Validators.minLength(3)]],
+  //     apellidos: ['', [Validators.required,Validators.minLength(5)]],
+  //     correo: ['', [Validators.required, Validators.email]],
+  //     direccion: ['', [Validators.required, Validators.minLength(5)]],
+  //     telefonoConvencional: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9)]],
+  //     telefonoCelular: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
+  //     referenciaPersNombre: ['', [Validators.required, Validators.minLength(3)]],
+  //     referenciaPersTelf: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]]
+  // });
+  // 
+}
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-
   // tslint:disable-next-line: member-ordering
   usuario: any = {
     idTipoUsuario: '2',
@@ -113,7 +129,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     telefonoConvencional: '',
     telefonoCelular: '',
     referenciaPersNombre: '',
-    referenciaPersTelf: ''
+    referenciaPersTelf: '',
   };
 
   // tslint:disable-next-line: member-ordering
@@ -124,21 +140,22 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
-          this.toastService.success("Profesor Agregado");
-          console.log('Profesor Agregado');
+          this.toastService.success("","Profesor Agregado");
           console.log(data);
           this.cargarprofesores();
         } else {
           this.toastService.info(
             data.message,
             "Profesor no agregado",
+            this.options
           );
         }
       },
       error => {
         this.toastService.error(
           "Vuelva a intertarlo",
-          "Error de conexión !");
+          "Datos NO Registrados !");
+          this.options
       }
     );
     

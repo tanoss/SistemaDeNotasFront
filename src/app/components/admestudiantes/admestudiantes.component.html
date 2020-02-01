@@ -74,28 +74,42 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="inputCorreo">
-                    Correo:
-                  </label>
-                  <input type="email" class="form-control" id="inputCorreo" [(ngModel)]="usuario.correo" name="correo"
-                    required />
-                </div>
+									<mat-form-field class="example-full-width">
+										<input matInput placeholder="Correo Electrónico" name="correo"
+											[formControl]="emailFormControl" [errorStateMatcher]="matcher"
+											[(ngModel)]="usuario.correo">
+
+										<mat-error
+											*ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+											Por favor ingrese correo válido
+										</mat-error>
+										<mat-error *ngIf="emailFormControl.hasError('required')">
+											Correo debe tener <strong>@</strong>
+										</mat-error>
+									</mat-form-field>
+								</div>
 
                 <div class="form-group">
-                  <label for="inputRefNombre">
-                    Nombre de Contacto de Emergencia:
-                  </label>
-                  <input type="email" class="form-control" id="inputRefNombre" name="refNombre"
-                    [(ngModel)]="usuario.referenciaPersNombre" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="inputRefNumero">
-                    Numero de contacto de Emergencia:
-                  </label>
-                  <input type="email" class="form-control" id="inputRefNumero" [(ngModel)]="usuario.referenciaPersTelf"
-                    name="refnumero" required />
-                </div>
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<input matInput placeholder="Nombre de Contacto" name="nombrecontacto"
+													[(ngModel)]="usuario.referenciaPersNombre" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required
+													#representanteInput="ngModel"/>
+												<mat-error *ngIf="representanteInput.hasError('required')">Campo Requerido</mat-error>
+												<mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+											</mat-form-field>
+										</div>
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<input matInput #numeroco maxlength="10" minlength="9" placeholder="Número Telefono" name="celular" [(ngModel)]="usuario.referenciaPersTelf" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
+												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
+												<mat-hint align="end">{{numeroco.value.length}} / 10</mat-hint>
+											</mat-form-field>
+										</div>
+										
+									</div>
+								</div>
               </form>
             </div>
             <div class="modal-footer">
