@@ -1,10 +1,17 @@
 
 import { Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RestService } from 'app/service/rest.service';
-import { Persona} from 'app/interfaces/persona.interface';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { ToastsManager } from 'ng6-toastr';
+import { Persona } from 'app/interfaces/persona.interface';
 import { AuthService } from 'app/service/auth.service';
+import {
+  MatPaginator,
+  MatTableDataSource,
+  MatSort,
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
+import { ToastsManager } from 'ng6-toastr';
 
 export interface PeriodicElement {
   name: string;
@@ -18,42 +25,86 @@ export interface Food {
   viewValue: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'MATEMATICAS', weight: '9.86', symbol: '8.87'},
-  {position: 2, name: 'SOCIALES', weight: '7.74', symbol: '8.01'},
-  {position: 3, name: 'LENGUAJE', weight: '6.21', symbol: '7.2'},
-  {position: 3, name: 'CIVICA', weight: '6.94', symbol: '8.1'},
-  {position: 5, name: 'NATURALES', weight: '5.12', symbol: '4.2'},
-];
 
 @Component({
   selector: 'app-calificaciones',
   templateUrl: './calificaciones.component.html',
   styleUrls: ['./calificaciones.component.scss']
 })
-export class CalificacionesComponent implements OnInit {
- 
+export class CalificacionesComponent implements OnInit,  AfterViewInit {
+  user: any;
+  public data: any;
+  public mostrarMensajeFiltro: boolean;
+  public displayedColumns = ['materia', 'nq1', 'nq2', 'promediofinal'];
+  public dataSource = new MatTableDataSource<Persona>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
     this.traernotas();
   }
-  constructor(private apiUserToken: AuthService, private service: RestService ){  
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  constructor(private apiUserToken: AuthService, private service: RestService) {
 
   }
 
+  // paginacion
+  setPaginator() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    const RangeLabel = (page: number, pageSize: number, length: number) => {
+      if (length == 0 || pageSize == 0) {
+        return `0 de ${length}`;
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize;
+      // If the start index exceeds the list length, do not try and fix the end index to the end.
+      const endIndex =
+        startIndex < length
+          ? Math.min(startIndex + pageSize, length)
+          : startIndex + pageSize;
+      return `${startIndex + 1} - ${endIndex} de ${length}`;
+    };
+
+    this.paginator._intl.itemsPerPageLabel = 'Items por Página';
+    this.paginator._intl.firstPageLabel = 'Primera Página';
+    this.paginator._intl.previousPageLabel = 'Página Anterior';
+    this.paginator._intl.nextPageLabel = 'Página Siguiente';
+    this.paginator._intl.lastPageLabel = 'Última Página';
+    this.paginator._intl.getRangeLabel = RangeLabel;
+  }
+
+  setData() {
+    this.dataSource = new MatTableDataSource(this.data);
+    this.setPaginator();
+  }
+
+  // Buscador/Filtro en Tabla
+  doFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    if (this.dataSource.filteredData.length == 0) {
+      this.mostrarMensajeFiltro = true;
+    } else {
+      this.mostrarMensajeFiltro = false;
+    }
+  }
 
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  user: any;
-  traernotas(){
+  traernotas() {
     this.user = this.apiUserToken.getUserToken();
-    
-      this.service.getData('id/' + this.user.sub).subscribe(
-         data => {
-           console.log(data)
-        }
-       )
+
+    this.service.getData('id/' + this.user.sub).subscribe(
+      data => {
+        this.data = data;
+        //iniciamos dataSource
+        //this.mostrarMensajeFiltro = false;
+        this.setData();
+      }
+    )
   }
 
 
