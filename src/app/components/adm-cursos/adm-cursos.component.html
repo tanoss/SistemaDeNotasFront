@@ -21,13 +21,16 @@
               <form role="form">
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Curso" id="curso" maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2"
+                    <input matInput placeholder="Número Curso" id="curso"  #cursoInput="ngModel"  maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2"
                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  />
+										<mat-error *ngIf="cursoInput.hasError('required')">Campo Requerido</mat-error>
 									</mat-form-field>
                 </div>
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-										<input matInput placeholder="Nombre Curso" type="text"  id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3" required />
+                    <input matInput placeholder="Nombre Curso" #gradoInput="ngModel"  type="text"  id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3" required onkeypress="return check1(event)" onpaste="return false" />
+										<mat-error *ngIf="gradoInput.hasError('required')">Campo Requerido</mat-error>
+                    
 									</mat-form-field>
                   
                 </div>
