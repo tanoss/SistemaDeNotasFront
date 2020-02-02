@@ -4,6 +4,7 @@ import { RestService } from 'app/service/rest.service';
 import { Persona} from 'app/interfaces/persona.interface';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { ToastsManager } from 'ng6-toastr';
+import { AuthService } from 'app/service/auth.service';
 
 export interface PeriodicElement {
   name: string;
@@ -33,9 +34,27 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class CalificacionesComponent implements OnInit {
  
   ngOnInit() {
+    this.traernotas();
   }
+  constructor(private apiUserToken: AuthService, private service: RestService ){  
+
+  }
+
+
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+  user: any;
+  traernotas(){
+    this.user = this.apiUserToken.getUserToken();
+    
+      this.service.getData('id/' + this.user.sub).subscribe(
+         data => {
+           console.log(data)
+        }
+       )
+  }
 
 
 }
