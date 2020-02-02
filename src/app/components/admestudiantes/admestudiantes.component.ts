@@ -112,7 +112,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   profesor: any[] = [];
   
 
-  agregarprof() {
+  agregarestu() {
     console.log(this.usuario);
     this.apiService.addData( this.usuario, 'addperson').subscribe(
       data => {

@@ -26,7 +26,7 @@
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
 												<input matInput #message minlength="10" maxlength="10" placeholder="Número de Cédula" name="cedula" 
-												[(ngModel)]="usuario.cedula" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text" required >
+												[(ngModel)]="usuario.cedula" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" onpaste="return false"  type="text" required >
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{message.value.length}} / 10</mat-hint>
 											</mat-form-field>		
@@ -38,8 +38,8 @@
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Nombres" name="nombre" id="nombre" minlength="3" type="text"
-											[(ngModel)]="usuario.nombre" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required 
-											#nombreInput="ngModel"/>
+											[(ngModel)]="usuario.nombre"  #nombreInput="ngModel"
+											required onkeypress="return check(event)" onpaste="return false"/>
 										<mat-error *ngIf="nombreInput.hasError('required')">Campo Requerido</mat-error>
 										<mat-error *ngIf="nombreInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
 
@@ -48,8 +48,8 @@
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Apellidos" name="apellido" minlength="3"
-											[(ngModel)]="usuario.apellido" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required
-											#apellidoInput="ngModel"/>
+											[(ngModel)]="usuario.apellido" #apellidoInput="ngModel"
+											required onkeypress="return check(event)" onpaste="return false"/>
 										<mat-error *ngIf="apellidoInput.hasError('required')">Campo Requerido</mat-error>
 										<mat-error *ngIf="apellidoInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
 									</mat-form-field>
@@ -57,7 +57,7 @@
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Dirección" name="direccion" minlength="5"
-											[(ngModel)]="usuario.direccion" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"  required 
+											[(ngModel)]="usuario.direccion" required  
 											#direccionInput="ngModel"/>
 										<mat-error *ngIf="direccionInput.hasError('required')">Campo Requerido</mat-error>
 										<mat-error *ngIf="direccionInput.hasError('minlength')">Mínimo 5 caracteres</mat-error>
@@ -75,7 +75,7 @@
 										</div>
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #numeroce maxlength="10" placeholder="Número Celular" name="celular" [(ngModel)]="usuario.telefonoCelular" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
+												<input matInput #numeroce minlength="10" maxlength="10" placeholder="Número Celular" name="celular" [(ngModel)]="usuario.telefonoCelular" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{numeroce.value.length}} / 10</mat-hint>
 											</mat-form-field>	
@@ -104,15 +104,15 @@
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
 												<input matInput placeholder="Nombre de Contacto" name="nombrecontacto"
-													[(ngModel)]="usuario.referenciaPersNombre" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" required
-													#representanteInput="ngModel"/>
+													[(ngModel)]="usuario.referenciaPersNombre" #representanteInput="ngModel" 
+													required onkeypress="return check(event)" />
 												<mat-error *ngIf="representanteInput.hasError('required')">Campo Requerido</mat-error>
 												<mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
 											</mat-form-field>
 										</div>
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #numeroco maxlength="10" minlength="9" placeholder="Número Telefono" name="celular" [(ngModel)]="usuario.referenciaPersTelf" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
+												<input matInput #numeroco maxlength="10" placeholder="Número Telefono" name="celular" [(ngModel)]="usuario.referenciaPersTelf" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{numeroco.value.length}} / 10</mat-hint>
 											</mat-form-field>

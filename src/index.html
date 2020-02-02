@@ -24,5 +24,53 @@
     </div>
   </app-root>
 </body>
+<script>
+  // acepta solo letras
+function check(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  // captura la entrada del teclado
+  key = e.keyCode || e.which;
+  teclado= String.fromCharCode(key).toLocaleLowerCase();
+  letras= " áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyz";
+  // la teclas especiales-izquiera-derecha-supr-ñ
+  especiales="8-37-38-46-164";
 
+  teclado_especial= false;
+
+  for (var i in especiales){
+    if(key==especiales[i]){
+        teclado_especial=true;break;
+    }
+  }
+  // no va a permitir
+  if(letras.indexOf(teclado)==-1 && !teclado_especial){
+    return false;
+  }
+
+  
+}
+function check1(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  // captura la entrada del teclado
+  key = e.keyCode || e.which;
+  teclado= String.fromCharCode(key).toLocaleLowerCase();
+  letras= "abcdefghijklmnñopqrstuvwxyz";
+  // la teclas especiales-izquiera-derecha-supr-ñ
+  especiales="164";
+
+  teclado_especial= false;
+
+  for (var i in especiales){
+    if(key==especiales[i]){
+        teclado_especial=true;break;
+    }
+  }
+  // no va a permitir
+  if(letras.indexOf(teclado)==-1 && !teclado_especial){
+    return false;
+  }
+
+  
+}
+</script>
 </html>

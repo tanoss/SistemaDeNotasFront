@@ -154,7 +154,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
       error => {
         this.toastService.error(
           "Vuelva a intertarlo",
-          "Datos NO Registrados !");
+          "Verifique sus Datos!");
           this.options
       }
     );
