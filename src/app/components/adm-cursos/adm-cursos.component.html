@@ -21,7 +21,8 @@
               <form role="form">
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-										<input matInput placeholder="Curso" type="number"  id="curso" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2" />
+                    <input matInput placeholder="Curso" id="curso" maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2"
+                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  />
 									</mat-form-field>
                 </div>
                 <div class="form-group">
@@ -67,8 +68,10 @@
               <form #formPara="ngForm" role="form">
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Paralelo" type="text"  id="paralelo" [(ngModel)]="paralelo.paralelo" name="Letra4" required maxlength="1"
+                    <input matInput placeholder="Paralelo" type="text" #paraleloInput="ngModel" id="paralelo" [(ngModel)]="paralelo.paralelo" name="Letra4" required maxlength="1"
                     onkeypress="return check1(event)"  />
+										<mat-error *ngIf="paraleloInput.hasError('required')">Campo Requerido</mat-error>
+
 									</mat-form-field>
                
                 </div>
