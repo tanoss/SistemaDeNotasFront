@@ -98,9 +98,9 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: member-ordering
   usuario: any = {
     idTipoUsuario: '3',
-    cedula: ' ',
-    nombre: ' ',
-    apellido: ' ',
+    cedula: '',
+    nombre: '',
+    apellido: '',
     correo: '',
     direccion: '',
     telefonoConvencional: '',
