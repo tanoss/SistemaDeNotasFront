@@ -87,8 +87,8 @@ export class AdmCursosComponent implements OnInit {
 
   grados: any;
   gp: any = {
-    idGrado: '',
-    idParalelo: ''
+    idGrado: 0,
+    idParalelo: 0
   };
 
 
@@ -129,9 +129,10 @@ export class AdmCursosComponent implements OnInit {
       data => {
         this.mensaje = data
         console.log(data);
+        this.listargrados();
       }
     )
-    this.listargrados();
+    
   }
   mensaje: any;
 
@@ -139,29 +140,30 @@ export class AdmCursosComponent implements OnInit {
     this.servicio.addData(this.paralelo, 'paraleloadd').subscribe(
       data => {
         //this.mensaje = data
-        this.data = data
-        console.log(this.mensaje)
-        console.log(this.paralelo)
+        //this.data = data
+        this.listarparalelos();
+        
       }
     )
-    this.listarparalelos();
+    
   }
 
   creargradop(grado: number, paralelo: number) {
     console.log(grado, paralelo);
     this.gp = {
-      gradoId: grado,
-      paraleloId: paralelo
+      idGrado: grado,
+      idParalelo: paralelo
     }
     this.creargradopa();
   }
   response: any;
-  creargradopa() {
 
+  creargradopa() {
     this.servicio.addData(this.gp, 'gradopadd').subscribe(
       data => {
         this.response = data;
-        console.log(this.response);
+        console.log(this.gp);
+        this.listargradospr();
       }
     )
   }
