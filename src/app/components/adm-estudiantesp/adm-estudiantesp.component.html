@@ -2,81 +2,120 @@
 <br>
 <br>
 <br>
-<div class="row">
-    <div class="col-md-4">
-        <mat-form-field>
-            <mat-label>Curso</mat-label>
-            <select matNativeControl required>
-                <option value="volvo">Primero</option>
-                <option value="saab">Segundo</option>
 
-            </select>
-        </mat-form-field>
-    </div>
-    <div class="col-md-4">
-        <mat-form-field>
-            <mat-label>Grado</mat-label>
-            <select matNativeControl required>
-                <option value="volvo">A</option>
-                <option value="saab">B</option>
 
-            </select>
-        </mat-form-field>
-
-    </div>
-    <div class="col-md-4">
-        <mat-form-field>
-            <mat-label>Materia</mat-label>
-            <select matNativeControl required>
-                <option value="volvo">Ciencias</option>
-                <option value="saab">Matematica</option>
-                <option value="saab">Lenguaje</option>
-
-            </select>
-        </mat-form-field>
-
-    </div>
-    
-
-</div>
 <div class="container-fluid">
-    <div class="row">
-
-      <div class="col-md-12">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-          </ng-container>
-
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Nombreso </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-
-          <!-- Weight Column -->
-          <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Nota 1 </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-          </ng-container>
-
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Nota 2 </th>
-            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-label>Seleccione Un Curso</mat-label>
+            <mat-select name="sisop">
+              <mat-option *ngFor="let curso of cursos " value="{{curso.idGradoParalelo}}"
+                (click)=" traermateria(curso.idGradoParalelo)">
+                {{curso.nombreGrado}} {{curso.paralelo}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-label>Seleccione Un Materia</mat-label>
+            <mat-select name="peropc">
+              <mat-option *ngFor="let materia of materias " value="{{materia.idMateria}}"
+                (click)=" listarestudiantes(materia.idMateria,materia.idGradoParalelo,materia.idDocente)">
+                {{materia.materia}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Buscar...">
+          </mat-form-field>
+        </div>
       </div>
-
     </div>
   </div>
+</div>
 
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <table mat-table [(dataSource)]="dataSource" matSort>
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombres</b>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="apellidos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Apellidos</b> </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+        </ng-container>
+        <ng-container matColumnDef="quimestre1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Quimestre 1</b> </th>
+          <td mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Nota 1" [value]="element.notaQuimestreUno" [(ngModel)]="element.notaQuimestreUno">
+            </mat-form-field>
+          </td>
+          <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>   Quimestre 1</b> </th>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Name" [value]="element.notaQuimestreUno" [(ngModel)]="element.notaQuimestreUno">
+            </mat-form-field>
+          </mat-cell> -->
+        </ng-container>
+        <ng-container matColumnDef="quimestre2">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Quimestre 2</b> </th>
+          <td mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Nota 2" [value]="element.notaQuimestreDos" [(ngModel)]="element.notaQuimestreDos">
+            </mat-form-field>  
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="promediofinal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nota Final</b> </th>
+          <td mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Nota Final" [value]="element.promedioFinal" [(ngModel)]="element.promedioFinal">
+            </mat-form-field>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="opciones">
+          <th class="centre" mat-header-cell *matHeaderCellDef>
+              <div ><b>Opciones</b> </div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+              <div class="row justify-content-center">
+                  <button mat-icon-button color="primary"
+                      (click)="recibirid(element.idLibreta,element.idClase,element.idPeriodoLectivo,element.notaQuimestreUno,element.notaQuimestreDos,element.promedioFinal)">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                  </button>
+              </div>
+          </td>
+      </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+<mat-error class="centre" *ngIf="mostrarMensajeFiltro"><b>No existen resultados</b>
+</mat-error>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10, 15, 25, 50, 100]" showFirstLastButtons>
+</mat-paginator>

@@ -1,6 +1,6 @@
 {
     "/sdn": {
-        "target":"http://192.168.100.29:8083",
+        "target":"http://localhost:8083",
         
         "secure": false,
         "changeOrigin": true
