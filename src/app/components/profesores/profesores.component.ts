@@ -12,7 +12,7 @@ import {
 import { ToastsManager } from 'ng6-toastr';
 import { Persona } from 'app/interfaces/persona.interface';
 // validar input
-import { FormControl, FormGroupDirective, NgForm, Validators,FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 export class InputEmail implements ErrorStateMatcher {
@@ -39,7 +39,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     Validators.required,
     Validators.email,
   ]);
- 
+
   options: any = {
     toastLife: 3000,
     dismiss: "auto",
@@ -93,26 +93,29 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   constructor(private apiService: RestService,
     public toastService: ToastsManager,
-    vcr: ViewContainerRef,private formBuilder: FormBuilder
+    vcr: ViewContainerRef, private formBuilder: FormBuilder
   ) {
     this.toastService.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
     this.cargarprofesores();
-  //   this.profesors =this.formBuilder.group({
-  //     cedula: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],            
-  //     nombres: ['', [Validators.required,Validators.minLength(3)]],
-  //     apellidos: ['', [Validators.required,Validators.minLength(5)]],
-  //     correo: ['', [Validators.required, Validators.email]],
-  //     direccion: ['', [Validators.required, Validators.minLength(5)]],
-  //     telefonoConvencional: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9)]],
-  //     telefonoCelular: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
-  //     referenciaPersNombre: ['', [Validators.required, Validators.minLength(3)]],
-  //     referenciaPersTelf: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]]
-  // });
-  // 
-}
+    this.profesorid();
+    this.listamaterias();
+    this.listarcursos();
+    //   this.profesors =this.formBuilder.group({
+    //     cedula: ['', [Validators.required,Validators.minLength(10),Validators.maxLength(10)]],            
+    //     nombres: ['', [Validators.required,Validators.minLength(3)]],
+    //     apellidos: ['', [Validators.required,Validators.minLength(5)]],
+    //     correo: ['', [Validators.required, Validators.email]],
+    //     direccion: ['', [Validators.required, Validators.minLength(5)]],
+    //     telefonoConvencional: ['', [Validators.required, Validators.minLength(9),Validators.maxLength(9)]],
+    //     telefonoCelular: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]],
+    //     referenciaPersNombre: ['', [Validators.required, Validators.minLength(3)]],
+    //     referenciaPersTelf: ['', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]]
+    // });
+    // 
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
@@ -140,7 +143,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
-          this.toastService.success("","Profesor Agregado");
+          this.toastService.success("", "Profesor Agregado");
           console.log(data);
           this.cargarprofesores();
         } else {
@@ -155,11 +158,13 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
         this.toastService.error(
           "Vuelva a intertarlo",
           "Verifique sus Datos!");
-          this.options
+        this.options
       }
     );
-    
+
   }
+
+  profesores: any;
   cargarprofesores() {
     this.apiService.getData('allprof').subscribe(
       data => {
@@ -175,6 +180,65 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  profesorid() {
+    this.apiService.getData('profesorasig').subscribe(
+      data => {
+        this.profesores = data;
+        console.log(this.profesores);
+      }
+    )
+  }
+  materias: any;
+  listamaterias() {
+    this.apiService.getData('materias').subscribe(
+      data => {
+        this.materias = data;
+        console.log(this.materias);
+      }
+    )
+  }
+  grados: any;
+  listarcursos() {
+    this.apiService.getData('gradopr').subscribe(
+      data => {
+        this.grados = data;
+      }
+    )
+  }
+docente: number;
+materia: number;
+grado: number;
+  save1(docente) {
+    this.docente = docente;
+  }
+  save2(materia) {
+    this.materia = materia;
+  }
+  save3(grado) {
+    this.grado = grado;
+  }
+  asignars : any;
+
+  asignar(){
+    this.asignars = {
+      idDocente: this.docente,
+      idMateria: this.materia,
+      idGrado: this.grado
+    }
+    this.asignarprof();
+  }
+
+  asignarprof(){
+    this.apiService.addData(this.asignars,'profesorasig1').subscribe(
+      data =>{
+        if (data.message){
+          //usar el mensaje
+          console.log(data.message);
+        }
+      }
+    )
   }
 
 }

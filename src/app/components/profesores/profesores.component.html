@@ -2,12 +2,12 @@
 <br>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<a id="modal-599445" href="#modal-container-5994451" role="button" class="btn btn-success"
-				data-toggle="modal" >
+				data-toggle="modal">
 				<mat-icon>person_add</mat-icon> Crear Profesor
 			</a>
-			<div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel" 
+			<div class="modal fade" id="modal-container-5994451" role="dialog" aria-labelledby="myModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog " role="document">
 					<div class="modal-content">
@@ -25,11 +25,14 @@
 									<div class="row">
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #message minlength="10" maxlength="10" placeholder="Número de Cédula" name="cedula" 
-												[(ngModel)]="usuario.cedula" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" onpaste="return false"  type="text" required >
+												<input matInput #message minlength="10" maxlength="10"
+													placeholder="Número de Cédula" name="cedula"
+													[(ngModel)]="usuario.cedula"
+													onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+													onpaste="return false" type="text" required>
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{message.value.length}} / 10</mat-hint>
-											</mat-form-field>		
+											</mat-form-field>
 										</div>
 										<div class="col-md-6">
 										</div>
@@ -37,48 +40,59 @@
 								</div>
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
-										<input matInput placeholder="Nombres" name="nombre" id="nombre" minlength="3" type="text"
-											[(ngModel)]="usuario.nombre"  #nombreInput="ngModel"
-											required onkeypress="return check(event)" onpaste="return false"/>
+										<input matInput placeholder="Nombres" name="nombre" id="nombre" minlength="3"
+											type="text" [(ngModel)]="usuario.nombre" #nombreInput="ngModel" required
+											onkeypress="return check(event)" onpaste="return false" />
 										<mat-error *ngIf="nombreInput.hasError('required')">Campo Requerido</mat-error>
-										<mat-error *ngIf="nombreInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+										<mat-error *ngIf="nombreInput.hasError('minlength')">Mínimo 3 caracteres
+										</mat-error>
 
 									</mat-form-field>
 								</div>
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Apellidos" name="apellido" minlength="3"
-											[(ngModel)]="usuario.apellido" #apellidoInput="ngModel"
-											required onkeypress="return check(event)" onpaste="return false"/>
-										<mat-error *ngIf="apellidoInput.hasError('required')">Campo Requerido</mat-error>
-										<mat-error *ngIf="apellidoInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+											[(ngModel)]="usuario.apellido" #apellidoInput="ngModel" required
+											onkeypress="return check(event)" onpaste="return false" />
+										<mat-error *ngIf="apellidoInput.hasError('required')">Campo Requerido
+										</mat-error>
+										<mat-error *ngIf="apellidoInput.hasError('minlength')">Mínimo 3 caracteres
+										</mat-error>
 									</mat-form-field>
 								</div>
 								<div class="form-group">
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Dirección" name="direccion" minlength="5"
-											[(ngModel)]="usuario.direccion" required  
-											#direccionInput="ngModel"/>
-										<mat-error *ngIf="direccionInput.hasError('required')">Campo Requerido</mat-error>
-										<mat-error *ngIf="direccionInput.hasError('minlength')">Mínimo 5 caracteres</mat-error>
+											[(ngModel)]="usuario.direccion" required #direccionInput="ngModel" />
+										<mat-error *ngIf="direccionInput.hasError('required')">Campo Requerido
+										</mat-error>
+										<mat-error *ngIf="direccionInput.hasError('minlength')">Mínimo 5 caracteres
+										</mat-error>
 									</mat-form-field>
 								</div>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #numeroc maxlength="9" placeholder="Número Convencional" name="convencional" [(ngModel)]="usuario.telefonoConvencional" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text" >
+												<input matInput #numeroc maxlength="9" placeholder="Número Convencional"
+													name="convencional" [(ngModel)]="usuario.telefonoConvencional"
+													onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+													type="text">
 												<mat-hint align="start">Máximo 9 caracteres </mat-hint>
 												<mat-hint align="end">{{numeroc.value.length}} / 9</mat-hint>
-											</mat-form-field>	
-											
+											</mat-form-field>
+
 										</div>
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #numeroce minlength="10" maxlength="10" placeholder="Número Celular" name="celular" [(ngModel)]="usuario.telefonoCelular" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
+												<input matInput #numeroce minlength="10" maxlength="10"
+													placeholder="Número Celular" name="celular"
+													[(ngModel)]="usuario.telefonoCelular"
+													onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+													type="text" required>
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{numeroce.value.length}} / 10</mat-hint>
-											</mat-form-field>	
+											</mat-form-field>
 										</div>
 									</div>
 								</div>
@@ -104,26 +118,33 @@
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
 												<input matInput placeholder="Nombre de Contacto" name="nombrecontacto"
-													[(ngModel)]="usuario.referenciaPersNombre" #representanteInput="ngModel" 
-													required onkeypress="return check(event)" />
-												<mat-error *ngIf="representanteInput.hasError('required')">Campo Requerido</mat-error>
-												<mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+													[(ngModel)]="usuario.referenciaPersNombre"
+													#representanteInput="ngModel" required
+													onkeypress="return check(event)" />
+												<mat-error *ngIf="representanteInput.hasError('required')">Campo
+													Requerido</mat-error>
+												<mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3
+													caracteres</mat-error>
 											</mat-form-field>
 										</div>
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #numeroco maxlength="10" placeholder="Número Telefono" name="celular" [(ngModel)]="usuario.referenciaPersTelf" onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  required>
+												<input matInput #numeroco maxlength="10" placeholder="Número Telefono"
+													name="celular" [(ngModel)]="usuario.referenciaPersTelf"
+													onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+													type="text" required>
 												<mat-hint align="start">Máximo 10 caracteres </mat-hint>
 												<mat-hint align="end">{{numeroco.value.length}} / 10</mat-hint>
 											</mat-form-field>
 										</div>
-										
+
 									</div>
 								</div>
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-info"  data-dismiss="modal" [disabled]="formProfe.invalid" (click)="agregarprof()">
+							<button type="button" class="btn btn-info" data-dismiss="modal"
+								[disabled]="formProfe.invalid" (click)="agregarprof()">
 								<mat-icon>person_add</mat-icon> Agregar
 							</button>
 							<button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -146,6 +167,61 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-6">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#asignarp">
+				Asignar un Profesor a una materia
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="asignarp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Asignar un Profesor</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<mat-form-field>
+								<mat-label>Seleccione Un Profesor</mat-label>
+								<mat-select  name="sisop">
+								  <mat-option *ngFor="let profesor of profesores" value="{{profesor.idDocente}}" (click)=" save1(profesor.idDocente)">
+									{{profesor.nombre}} {{profesor.apellido}}
+								  </mat-option>
+								</mat-select>
+							  </mat-form-field>
+							  <mat-form-field>
+								<mat-label>Seleccione Una Materia</mat-label>
+								<mat-select  name="td">
+								  <mat-option *ngFor="let materia of materias" value="{{materia.idMateria}}" (click)=" save2(materia.idMateria)"
+									>
+									{{materia.materia}} 
+								  </mat-option>
+								</mat-select>
+							  </mat-form-field>
+							  <mat-form-field>
+								<mat-label>Seleccione Una Materia</mat-label>
+								<mat-select  name="ddd">
+								  <mat-option *ngFor="let grado of grados" value="{{grado.idGradoParalelo}}" (click)=" save3(grado.idGradoParalelo)"
+									>
+									{{grado.grado.grado}}  {{grado.paralelo.paralelo}}
+								  </mat-option>
+								</mat-select>
+							  </mat-form-field>
+							  
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" (click)="asignar()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
 	</div>
 	<br>
 

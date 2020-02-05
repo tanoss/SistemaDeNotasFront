@@ -19,4 +19,4 @@ import { ProfesoresComponent } from 'app/components/profesores/profesores.compon
   })
 
 
-export class ProfesoresModule {}
+export class ProfesoresModule { }
