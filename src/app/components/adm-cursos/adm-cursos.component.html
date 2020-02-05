@@ -18,18 +18,20 @@
               </button>
             </div>
             <div class="modal-body">
-              <form role="form">
+              <form #formCurso="ngForm" role="form"  >
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Número Curso" id="curso"  #cursoInput="ngModel"  maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="2"
+                    <input matInput placeholder="Número Curso" id="curso"  #cursoInput="ngModel"  maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="1"
                     onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  />
 										<mat-error *ngIf="cursoInput.hasError('required')">Campo Requerido</mat-error>
 									</mat-form-field>
                 </div>
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nombre Curso" #gradoInput="ngModel"  type="text"  id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3" required onkeypress="return check1(event)" onpaste="return false" />
-										<mat-error *ngIf="gradoInput.hasError('required')">Campo Requerido</mat-error>
+                    <input matInput placeholder="Nombre Curso" #gradoInput="ngModel" minlength="3" type="text"  id="grado1" [(ngModel)]="grado.nombreGrado" name="Letra3" required onkeypress="return check1(event)" onkeyup="this.value=this.value.toUpperCase();" onpaste="return false" />
+                    <mat-error *ngIf="gradoInput.hasError('required')">Campo Requerido</mat-error>
+										<mat-error *ngIf="gradoInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+                    
                     
 									</mat-form-field>
                   
@@ -40,10 +42,10 @@
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-info" (click)="creargrado()" data-dismiss="modal">
+              <button type="button" class="btn btn-info"  [disabled]="formCurso.invalid" (keyup.enter)="creargrado()" (click)="creargrado()" data-dismiss="modal">
                 <mat-icon>person_add</mat-icon> Agregar
               </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
+              <button type="button" class="btn btn-danger" data-dismiss="modal" >
                 <mat-icon>remove</mat-icon> Cancelar
               </button>
             </div>
@@ -116,7 +118,7 @@
                 <mat-select [(ngModel)]="grado.idGrado" name="sisop">
                   <mat-option *ngFor="let grado of grados" value="{{grado.idGrado}}"
                     >
-                    {{grado.nombreGrado}}
+                    {{grado.nombreGrado | uppercase}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -126,7 +128,7 @@
                 <mat-select [(ngModel)]="paralelo.idParalelo" name="par">
                   <mat-option *ngFor="let paralelo of paralelos1" value="{{paralelo.idParalelo}}"
                     >
-                    {{paralelo.paralelo}}
+                    {{paralelo.paralelo | uppercase}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -179,11 +181,11 @@
         </ng-container>
         <ng-container matColumnDef="nombres">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombre Curso</b> </th>
-          <td mat-cell *matCellDef="let element"> {{element.grado.nombreGrado}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.grado.nombreGrado | uppercase}} </td>
         </ng-container>
         <ng-container matColumnDef="apellidos">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Paralelo</b> </th>
-          <td mat-cell *matCellDef="let element"> {{element.paralelo.paralelo}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.paralelo.paralelo | uppercase}} </td>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

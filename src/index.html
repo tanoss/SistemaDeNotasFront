@@ -69,8 +69,12 @@ function check1(e) {
   if(letras.indexOf(teclado)==-1 && !teclado_especial){
     return false;
   }
-
-  
 }
+// sin espacios
+function espacios(e) {
+  let contenido = e.target.value;
+  e.target.value = contenido.toUpperCase().replace(" ", "");
+}
+
 </script>
 </html>
