@@ -143,9 +143,10 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
-          this.toastService.success("", "Profesor Agregado");
+          this.toastService.success(data.message, "",this.options);
           console.log(data);
           this.cargarprofesores();
+          this.profesorid();
         } else {
           this.toastService.info(
             data.message,

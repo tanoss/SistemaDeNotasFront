@@ -122,6 +122,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
           this.toastService.success("", "Estudiante Agregado");
           console.log(data);
           this.cargarestudiantes();
+          this.listaridestudiante();
         } else {
           this.toastService.info(
             data.message,

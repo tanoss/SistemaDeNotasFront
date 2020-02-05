@@ -138,7 +138,7 @@ export class AdmEstudiantespComponent implements OnInit {
   
     this.libreta = {
       idLibreta: libreta,
-      idClase: periodo,
+      idClase: clase,
       idPeriodoLectivo: periodo,
       notaQuimestreUno: n1,
       notaQuimestreDos: n2,
