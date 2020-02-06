@@ -32,7 +32,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   public mostrarMensajeFiltro: boolean;
   public displayedColumns = ['cedula', 'nombres', 'apellidos', 'correo', 'direccion', 'telefonoConvencional', 'telefonoCelular', 'referenciaPersNombre', 'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
-
+nombre:string='';
 
   /// validatr input
   emailFormControl = new FormControl('', [
@@ -140,10 +140,17 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
 
   agregarprof() {
     console.log(this.usuario);
+    this.usuario.nombre = this.usuario.nombre.toUpperCase();
+    this.usuario.apellido= this.usuario.apellido.toUpperCase();
+    this.usuario.direccion = this.usuario.direccion.toUpperCase();
+    this.usuario.referenciaPersNombre = this.usuario.referenciaPersNombre.toUpperCase();
+    this.usuario.correo = this.usuario.correo.toLowerCase();
+
+
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
-          this.toastService.success(data.message, "",this.options);
+          this.toastService.success("","Profesor Agregado",this.options);
           console.log(data);
           this.cargarprofesores();
           this.profesorid();
@@ -241,5 +248,16 @@ grado: number;
       }
     )
   }
+  validarCorreoElectronico(nombre: string) {
+    const expreg = /^[a-z A-Z]*$/;
+    if (expreg.test(nombre)) {
+      console.log('select q1,q2,average(q1,q2) as promedio from asdas');
+      this.nombre = nombre; 
+      return true;      
+    } else {
+      console.log('adios');
+      return false;
+    }
 
+  }
 }
