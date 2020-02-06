@@ -33,6 +33,8 @@ export class OpcionperfilComponent implements OnInit, AfterViewInit {
   };
   public checked = undefined;
 
+  public boton: true;
+
   public mostrarMensajeFiltro: boolean;
   public noOpciones: boolean;
   public noPerfiles: boolean;

@@ -90,7 +90,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nota Final</b> </th>
           <td mat-cell *matCellDef="let element"> 
             <mat-form-field floatLabel="never">
-              <input matInput placeholder="Nota Final" [value]="element.promedioFinal" [(ngModel)]="element.promedioFinal">
+              <input disabled matInput placeholder="Nota Final" [value]="element.promedioFinal" [(ngModel)]="element.promedioFinal">
             </mat-form-field>
           </td>
         </ng-container>

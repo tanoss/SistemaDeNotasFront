@@ -115,8 +115,14 @@ export class AdmEstudiantespComponent implements OnInit {
       }
     )
   }
+  a: any;
+  b: any;
+  c: any;
   estudiantes: any;
   listarestudiantes(materia, grado, docente) {
+    this.a = materia;
+    this.b = grado;
+    this.c = docente;
     console.log('id materia: ' + materia + 'idgrado: ' + grado + 'idocente: ' + docente);
     this.service.getData('idme/' + docente + '/' + grado + '/' + materia).subscribe(
       data => {
@@ -135,7 +141,12 @@ export class AdmEstudiantespComponent implements OnInit {
 
   }
   recibirid(libreta, clase, periodo, n1, n2, promedio) {
-  
+    console.log(n1);
+    console.log(n2);
+    var resultado = n1 + n2 ;
+    // tslint:disable-next-line: prefer-const
+    var promedio1 = (resultado / 2);
+    console.log(promedio1);
     this.libreta = {
       idLibreta: libreta,
       idClase: clase,
@@ -154,6 +165,7 @@ export class AdmEstudiantespComponent implements OnInit {
         console.log(data);
       }
     )
+    this.listarestudiantes(this.a, this.b, this.c);
   }
 
 }
