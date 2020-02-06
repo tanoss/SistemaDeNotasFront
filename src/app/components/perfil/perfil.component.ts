@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AuthService } from 'app/service/auth.service';
 import { RestService } from 'app/service/rest.service';
 import { ToastsManager } from 'ng6-toastr';
@@ -46,8 +46,12 @@ export class PerfilComponent implements OnInit {
   constructor(
     private apiUserToken: AuthService,
     private apiService: RestService,
-    public toastService: ToastsManager
-  ) { }
+    public toastService: ToastsManager,
+    vcr: ViewContainerRef,
+  ) { 
+    this.toastService.setRootViewContainerRef(vcr);
+
+  }
 
   ngOnInit() {
     this.dataUser();
@@ -71,7 +75,7 @@ export class PerfilComponent implements OnInit {
         console.log('se actualizo');
         this.mensaje = data;
         this.toastService.success(
-          this.mensaje.message,
+          data.message,
           'La información ',
           this.options);
         this.mensaje = data;

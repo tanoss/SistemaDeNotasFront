@@ -1,66 +1,83 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-danger">
+          <div class="card-header card-header-info">
             <h4 class="card-title">Perfil de usuario </h4>
             <p class="card-category"><b>Información de usuario</b> </p>
           </div>
           <div class="card-body">
             <form>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label class="card-category">No. Cédula</label>
+                        <p class="card-category">{{usuario.cedula}}</p>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="card-category">Nombres</label>
+                        <p class="card-category"> {{usuario.nombre}} </p>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="card-category">Apellidos:</label>
+                        <p class="card-category">{{usuario.apellido}}</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label class="card-category">Correo electrónico:</label>
+                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.correo" name="Correo"
+                            value="{{usuario.correo}}"> </p>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="card-category">Teléfono Convencional:</label>
+
+                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoConvencional"
+                            name="Convencional" value="{{usuario.telefonoConvencional}}" minlength="10" maxlength="12">
+                        </p>
+                      </div>
+                      <div class="col-md-4">
+                        <label class="card-category">Teléfono Celular:</label>
+
+                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoCelular"
+                            name="telefonoCelular" value="{{usuario.telefonoCelular}}" minlength="10" maxlength="12">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-12">
-                  <label class="card-category">No. Cédula</label>
-                  <p class="card-category">{{usuario.cedula}}</p>
+                  <label class="card-category">Dirección: </label>
+
+                  <p class="card-category"> <input type="text" size="40px" [(ngModel)]="usuario.direccion" name="Direccion"
+                      value="{{usuario.direccion}}"> </p>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <hr>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <label class="card-category">Nombres</label>
-                  <p class="card-category"> {{usuario.nombre}} </p>
-                </div>
-                <div class="col-md-4">
-                  <label class="card-category">Apellidos</label>
-                  <p class="card-category">{{usuario.apellido}}</p>
-                </div>
-                <div class="col-md-4">
-                  <label class="card-category">Correo</label>
-                
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.correo"  name="Correo" value="{{usuario.correo}}"> </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="card-category">Dirección</label>
-                
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.direccion"  name="Direccion" value="{{usuario.direccion}}"> </p>
-                </div>
-                <div class="col-md-4">
-                  <label class="card-category">Teléfono Convencional</label>
-                  
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoConvencional"  name="Convencional" value="{{usuario.telefonoConvencional}}" minlength="10" maxlength="12"> </p>
-                </div>
-                <div class="col-md-4">
-                  <label class="card-category">Teléfono Celular</label>
-                  
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoCelular"  name="telefonoCelular" value="{{usuario.telefonoCelular}}" minlength="10" maxlength="12" > </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12"></div>
-                <p>___________________________________________________________________________________</p>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="card-category">Contacto de Emergencia</label>
-                  
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersNombre"  name="nombreReferencia" value="{{usuario.referenciaPersNombre}}"> </p>
+                  <label class="card-category">Contacto de Emergencia:</label>
+
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersNombre"
+                      name="nombreReferencia" value="{{usuario.referenciaPersNombre}}"> </p>
                 </div>
                 <div class="col-md-8">
-                  <label class="card-category">Número de Contacto de Emegencia</label>
-                  
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersTelf"  name="telefonoReferencia" value="{{usuario.referenciaPersTelf}}" minlength="10" maxlength="12"> </p>
+                  <label class="card-category">Número de Contacto de Emergencia:</label>
+
+                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersTelf"
+                      name="telefonoReferencia" value="{{usuario.referenciaPersTelf}}" minlength="10" maxlength="12">
+                  </p>
                 </div>
               </div>
               <div class="row">
@@ -69,8 +86,8 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                  <button mat-stroked-button color="primary" (click)="actualizaper()">
-                      Actualizar  Información
+                  <button mat-raised-button color="primary" (click)="actualizaper()">
+                    Actualizar Información
                   </button>
                 </div>
               </div>
