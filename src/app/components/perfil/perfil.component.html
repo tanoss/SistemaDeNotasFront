@@ -8,7 +8,7 @@
             <p class="card-category"><b>Información de usuario</b> </p>
           </div>
           <div class="card-body">
-            <form>
+            <form #formPer="ngForm">
 
               <div class="container-fluid">
                 <div class="row">
@@ -29,34 +29,75 @@
                     </div>
                     <div class="row">
                       <div class="col-md-4">
-                        <label class="card-category">Correo electrónico:</label>
-                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.correo" name="Correo"
-                            value="{{usuario.correo}}"> </p>
+                        <mat-form-field appearance="outline">
+                          <mat-label>Correo Electrónico</mat-label>
+                          <input matInput placeholder="Correo Electrónico" 
+                              name="correo" 
+                              class="text-lowercase"
+                              [formControl]="emailFormControl"
+                              [errorStateMatcher]="matcher"
+                              [(ngModel)]="usuario.correo"
+                              value="{{usuario.correo}}">
+      
+                          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                            Por favor ingrese correo válido
+                          </mat-error>
+                          <mat-error *ngIf="emailFormControl.hasError('required')">
+                            Correo debe tener <strong>@</strong>
+                          </mat-error>
+                        </mat-form-field>
                       </div>
                       <div class="col-md-4">
-                        <label class="card-category">Teléfono Convencional:</label>
-
-                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoConvencional"
-                            name="Convencional" value="{{usuario.telefonoConvencional}}" minlength="10" maxlength="12">
-                        </p>
+                        <mat-form-field  appearance="outline">
+                          <mat-label>Teléfono Convencional</mat-label>
+                          <input matInput #numerocos 
+                            minlength="9"
+                            maxlength="9" 
+                            value="{{usuario.telefonoConvencional}}"
+                            placeholder="Teléfono Convencional(02)"
+                            name="telcontacto"
+                            [(ngModel)]="usuario.telefonoConvencional"
+                            onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" type="text">
+                          <mat-hint align="start">Máximo 9 caracteres </mat-hint>
+                          <mat-hint align="end">{{numerocos.value.length}} / 9</mat-hint>
+                        </mat-form-field>
                       </div>
                       <div class="col-md-4">
                         <label class="card-category">Teléfono Celular:</label>
 
-                        <p class="card-category"> <input type="text" [(ngModel)]="usuario.telefonoCelular"
-                            name="telefonoCelular" value="{{usuario.telefonoCelular}}" minlength="10" maxlength="12">
-                        </p>
+                        <mat-form-field  appearance="outline">
+                          <mat-label>Teléfono Celular</mat-label>
+                          <input matInput #numerocs 
+                            minlength="10"
+                            maxlength="10" 
+                            value="{{usuario.telefonoCelular}}" 
+                            placeholder="Teléfono Celular"
+                            name="tel"
+                            [(ngModel)]="usuario.telefonoCelular"
+                            onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" type="text">
+                          <mat-hint align="start">Máximo 10 caracteres </mat-hint>
+                          <mat-hint align="end">{{numerocs.value.length}} / 10</mat-hint>
+                        </mat-form-field>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12">
-                  <label class="card-category">Dirección: </label>
-
-                  <p class="card-category"> <input type="text" size="40px" [(ngModel)]="usuario.direccion" name="Direccion"
-                      value="{{usuario.direccion}}"> </p>
+                <div class="col-md-8">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput 
+                            placeholder="Dirección" 
+                            name="direccion" 
+                            minlength="5" 
+                            value="{{usuario.direccion}}"
+                            class="text-uppercase"
+                            [(ngModel)]="usuario.direccion" required 
+                            #direccionInput="ngModel" />
+                        <mat-error *ngIf="direccionInput.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="direccionInput.hasError('minlength')">Mínimo 5 caracteres</mat-error>
+                      </mat-form-field>
                 </div>
 
               </div>
@@ -67,17 +108,35 @@
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <label class="card-category">Contacto de Emergencia:</label>
-
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersNombre"
-                      name="nombreReferencia" value="{{usuario.referenciaPersNombre}}"> </p>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contacto Emergencia</mat-label>
+                        <input matInput 
+                          placeholder="Nombre de Contacto" 
+                          name="nombrecontacto" 
+                          minlength="3"
+                          class="text-uppercase"
+                          value="{{usuario.referenciaPersNombre}}"
+                          [(ngModel)]="usuario.referenciaPersNombre" required  
+													oninput="this.value = this.value.replace(/[^a-z A-Z]/g,'')" required 
+                          #representanteInput="ngModel" />
+                        <mat-error *ngIf="representanteInput.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3 caracteres</mat-error>
+                      </mat-form-field>
                 </div>
-                <div class="col-md-8">
-                  <label class="card-category">Número de Contacto de Emergencia:</label>
-
-                  <p class="card-category"> <input type="text" [(ngModel)]="usuario.referenciaPersTelf"
-                      name="telefonoReferencia" value="{{usuario.referenciaPersTelf}}" minlength="10" maxlength="12">
-                  </p>
+                <div class="col-md-5">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Contacto de Emergencia</mat-label>
+                    <input matInput #numeroc
+                      minlength="9"
+                      maxlength="10" 
+                      placeholder="Número Teléfono" 
+                      name="telcontacto"
+                      value="{{usuario.referenciaPersTelf}}"
+                      [(ngModel)]="usuario.referenciaPersTelf"
+                      onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" type="text">
+                    <mat-hint align="start">Máximo 10 caracteres </mat-hint>
+                    <mat-hint align="end">{{numeroc.value.length}} / 10</mat-hint>
+                  </mat-form-field>
                 </div>
               </div>
               <div class="row">
@@ -86,8 +145,8 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-4">
-                  <button mat-raised-button color="primary" (click)="actualizaper()">
-                    Actualizar Información
+                  <button mat-raised-button color="primary"  [disabled]="formPer.invalid" (click)="actualizaper()">
+                   <mat-icon>spellcheck </mat-icon> Actualizar Información
                   </button>
                 </div>
               </div>
