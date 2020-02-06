@@ -2,16 +2,32 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AuthService } from 'app/service/auth.service';
 import { RestService } from 'app/service/rest.service';
 import { ToastsManager } from 'ng6-toastr';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
+export class InputEmail implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+  
+ 
+   /// validatr input
+   emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  matcher = new InputEmail();
   options: any = {
-    toastLife: 4000,
-    dismiss: 'auto',
+    toastLife: 3000,
+    dismiss: "auto",
     showCloseButton: true
   };
 

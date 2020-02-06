@@ -51,8 +51,8 @@
                                   <input matInput placeholder="Contraseña" [(ngModel)]="credential.clave" name="contraseña" required
                                   #passInput="ngModel" [type]="hide ? 'password' : 'text'">
                                   <mat-icon class="material-icons" matSuffix
-                                    (click)="hide = !hide">
-                                    {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  (click)="hide = !hide">
+                                  {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     <mat-error *ngIf="passInput.hasError('required')">Contraseña es
                                         requerido.
                                     </mat-error>
