@@ -163,9 +163,10 @@ export class AdmEstudiantespComponent implements OnInit {
     this.service.updateData(this.libreta, 'editnotas').subscribe(
       data => {
         console.log(data);
+        this.listarestudiantes(this.a, this.b, this.c);
       }
     )
-    this.listarestudiantes(this.a, this.b, this.c);
+   
   }
 
 }
