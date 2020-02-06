@@ -42,14 +42,7 @@
                     <mat-error *ngIf="passNew.hasError('required')">La nueva contraseña es requerida.</mat-error>
                     <mat-error *ngIf="passNew.hasError('minlength')">Mínimo 6 caracteres son requeridos. </mat-error>
                   </mat-form-field>
-                  <mat-form-field>
-                    <mat-label> <strong>Confirma  nueva contraseña</strong></mat-label>
-                    <input matInput placeholder="Ingrese su nueva contraseña" [(ngModel)]="passNw.clave"
-                      name="antigua" [type]="hide ? 'password' : 'text'" minlength="6" #passNew="ngModel" required>
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    <mat-error *ngIf="passNew.hasError('required')">Confirma contraseña es requerida.</mat-error>
-                    <mat-error *ngIf="passNew.hasError('minlength')">Mínimo 6 caracteres son requeridos. </mat-error>
-                  </mat-form-field>
+                 
                 </div>
               </div>
               <div>

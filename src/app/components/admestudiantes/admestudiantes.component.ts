@@ -208,7 +208,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
       idEstudiante: this.estudiante,
       idMateriaDocenteGrado: this.grado
     }
-    this.asignarestudiante();
+    //this.asignarestudiante();
   }
   
   asignarestudiante() {
