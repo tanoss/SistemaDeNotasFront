@@ -1,5 +1,5 @@
 .texto {
-  color: #00713d;
+  color: #26c9d4;
 }
 .example-card {
   max-width: 500px;
@@ -13,26 +13,25 @@
   margin-right: 15px;
   width: 200%;
   height: 264%;
-  background-image: url(../../assets/img/sidebar-5.jfif);
   position: absolute;
   left: 100px;
   top: 150px;
 }
 
-.titulo {
-  text-align: center;
-  color: #00713d;
-}
+// .titulo {
+//   text-align: center;
+//   color: #29302d;
+// }
 .piePagina {
   text-align: center;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
-  color: #00713d !important;
+  color: #38c583 !important;
 }
 
 ::ng-deep.mat-form-field-underline {
-  background-color: #00713d !important;
+  background-color: #4c5853 !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
@@ -40,7 +39,8 @@
 }
 
 .material-icons {
-  color: #00713d;
+  color: #fdfdfd;
+
 }
 //*************** scss ***************
 
@@ -70,7 +70,6 @@
   margin: 24px auto;
 }
 .banner-sec {
-  background: url(../../assets/img/sidebar-5.jfif) no-repeat left bottom;
   background-size: cover;
   height: 455px;
   border-radius: 10px 10px 10px 10px;
@@ -140,21 +139,21 @@
   text-align: center;
 }
 
-.login-sec .copy-text i {
-  color: #00713d;
-  text-align: center;
-}
+// .login-sec .copy-text i {
+//   color: #3b3f3d;
+//   text-align: center;
+// }
 
-.login-sec .copy-text a {
-  color: #00713d;
-  text-align: center;
-}
+// .login-sec .copy-text a {
+//   color: #585f5c;
+//   text-align: center;
+// }s
 
 .login-sec h2 {
   margin-bottom: 30px;
   font-weight: 800;
   font-size: 30px;
-  color: #00713d;
+  color: #ffffff;
 }
 
 .login-sec h2:after {
@@ -169,12 +168,12 @@
   margin-right: auto;
 }
 
-.banner-text {
-  width: 70%;
-  position: absolute;
-  bottom: 40px;
-  padding-left: 20px;
-}
+// .banner-text {
+//   width: 70%;
+//   position: absolute;
+//   bottom: 40px;
+//   padding-left: 20px;
+// }
 
 .banner-text h2 {
   color: #fff;
@@ -343,11 +342,21 @@ input {
   border-radius: 50%;
   margin: 5px;
 }
-
-.bg1 {
-  background-color: #00713d;
+md-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.example-card{
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
 }
 
-.bg3 {
-  background-color: #ea4335;
-}
+// .bg1 {
+//   background-color: #00713d;
+// }
+
+// .bg3 {
+//   background-color: #ea4335;
+// }
