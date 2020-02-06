@@ -2,7 +2,7 @@
  
   <!-- Material form login -->
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row">
                 <div class="col-md-4 banner-sec">
                     <div class="signup__overlay"></div>
@@ -17,45 +17,64 @@
                     </div>
                 </div>
                 <div class="col-md-8 login-sec" style="text-align:center">
-                    <h2 class="text-center">BIENVENIDO AL SISTEMA DE NOTAS</h2>
-                       <!-- Material form login -->
-                       <br>
-                       <br>
-                       <div class="card">
+                    <mat-grid-list class="example-card" cols="2" rowHeight="100px">
+                        <mat-grid-tile
+                                *ngFor="let tile of tiles"
+                                [colspan]="tile.cols"
+                                [rowspan]="tile.rows"
+                                [style.background]="tile.color">
+                                <h2 class="text-center">BIENVENIDO AL SISTEMA DE NOTAS</h2>
+
+                            </mat-grid-tile>
+                            
+                    </mat-grid-list>
+                       
                       
-                        <!--Card content-->
-                        <div class="card-body px-lg-2 pt-0">
-                      
-                          <!-- Form -->
-                          <form class="text-center" style="color: #757575;" action="#!"  (keyup.enter)="loginpass()">
-                          
-                            <!-- Email -->
-                            <div class="md-form">
-                              <input  matInput placeholder="Ingrese cédula"
-                              [(ngModel)]="credential.cedula" name="usuario" required
-                              #usuarioInput="ngModel">
-                              <label for="materialLoginFormEmail">Cédula</label>
+                       <mat-card class="example-card">
+                       <mat-card-content>
+                        
+                        <form #login="ngForm" class="form" (keyup.enter)="loginpass()">
+                            
+                            <div style="font-size: 18px">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Cédula</mat-label>
+                                  <input matInput placeholder="Cédula" [(ngModel)]="credential.cedula" name="usuario" required
+                                  #usuarioInput="ngModel">
+                                  <mat-icon matSuffix>account_circle</mat-icon>
+                                  <mat-error *ngIf="usuarioInput.hasError('required')">Cedula es
+                                    requerido.
+                                </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Contraseña</mat-label>
+                                  <input matInput placeholder="Contraseña" [(ngModel)]="credential.clave" name="contraseña" required
+                                  #passInput="ngModel" [type]="hide ? 'password' : 'text'">
+                                  <mat-icon class="material-icons" matSuffix
+                                    (click)="hide = !hide">
+                                    {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    <mat-error *ngIf="passInput.hasError('required')">Contraseña es
+                                        requerido.
+                                    </mat-error>
+                                </mat-form-field>
                             </div>
-                      
-                            <!-- Password -->
-                            <div class="md-form">
-                              <input type="password" id="materialLoginFormPassword" class="form-control" required>
-                              <label for="materialLoginFormPassword">Contraseña</label>
-                            </div>
-                            <button class="btn btn-info btn-block my-4" type="submit">Ingresar</button>
-                          </form>
-                          <!-- Form -->
-                      
-                        </div>
-                      
-                      </div>
-                    <div class="container-fluid">
+                        </form>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button type="button" class="btn btn-warning btn-lg" [disabled]="login.invalid"
+                            (click)="loginpass()"><i class="material-icons">
+                                lock_open
+                                </i><strong> Ingresar</strong></button>
+                    </mat-card-actions>
+                    
+                </mat-card>
+                    <!--<div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-1">
                                     </div>
-                                    <div class="col-md-10">
+                                     <div class="col-md-10">
                                         <mat-card class="example-card">
                                             <mat-card-content>
                                                 <form #login="ngForm" class="example-form" (keyup.enter)="loginpass()">
@@ -88,20 +107,15 @@
                                                     (click)="loginpass()"><strong>Ingresar</strong></button>
                                             </mat-card-actions>
                                         </mat-card>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </div> 
+                                    <div class="col-md-3">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="copy-text">
-                            <p class="piePagina"><i class="fa fa-copyright"></i> PENIEL CHRISTIAN SCHOOL</p>
-                            <p class="piePagina"><a href="https://www.espe.edu.ec">TODOS LOS DERECHOS
-                                    RESERVADOS.</a></p>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+

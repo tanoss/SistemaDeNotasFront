@@ -4,6 +4,13 @@ import { Router } from "@angular/router";
 import { ToastsManager } from "ng6-toastr";
 import { credentials, credentials1 } from "app/interfaces/credencia.interface";
 
+
+export interface Tile {
+  color: string;
+  cols: number;
+  rows: number;
+  text: string;
+}
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -20,7 +27,9 @@ export class LoginComponent implements OnInit {
     dismiss: "auto",
     showCloseButton: true
   };
-
+  tiles: Tile[] = [
+    {text: 'BIENVENIDO AL SISTEMA DE NOTAS', cols: 2, rows: 2, color: '#E4C141'},
+  ];
   hide = true;
 
   constructor(
