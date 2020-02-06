@@ -1,6 +1,8 @@
 <div class="container-fluid">
+ 
+  <!-- Material form login -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="row">
                 <div class="col-md-4 banner-sec">
                     <div class="signup__overlay"></div>
@@ -16,6 +18,37 @@
                 </div>
                 <div class="col-md-8 login-sec" style="text-align:center">
                     <h2 class="text-center">BIENVENIDO AL SISTEMA DE NOTAS</h2>
+                       <!-- Material form login -->
+                       <br>
+                       <br>
+                       <div class="card">
+                      
+                        <!--Card content-->
+                        <div class="card-body px-lg-2 pt-0">
+                      
+                          <!-- Form -->
+                          <form class="text-center" style="color: #757575;" action="#!"  (keyup.enter)="loginpass()">
+                          
+                            <!-- Email -->
+                            <div class="md-form">
+                              <input  matInput placeholder="Ingrese cédula"
+                              [(ngModel)]="credential.cedula" name="usuario" required
+                              #usuarioInput="ngModel">
+                              <label for="materialLoginFormEmail">Cédula</label>
+                            </div>
+                      
+                            <!-- Password -->
+                            <div class="md-form">
+                              <input type="password" id="materialLoginFormPassword" class="form-control" required>
+                              <label for="materialLoginFormPassword">Contraseña</label>
+                            </div>
+                            <button class="btn btn-info btn-block my-4" type="submit">Ingresar</button>
+                          </form>
+                          <!-- Form -->
+                      
+                        </div>
+                      
+                      </div>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">

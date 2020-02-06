@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4">
       <a id="modal-599445" href="#modal-grado" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Crear Grado
+        <mat-icon>apartment</mat-icon> Crear Grado
       </a>
       
       <div class="modal fade" id="modal-grado" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -11,7 +11,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Crear Grado
+                <mat-icon>apartment</mat-icon> Crear Grado
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
@@ -21,8 +21,14 @@
               <form #formCurso="ngForm" role="form"  >
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Número Curso" id="curso"  #cursoInput="ngModel"  maxlength="2" [(ngModel)]="grado.grado" name="Letra2" required maxlength="1"
-                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"  type="text"  />
+                    <input matInput 
+                      placeholder="Número Curso" 
+                      id="curso"  #cursoInput="ngModel"  
+                      maxlength="2" 
+                      [(ngModel)]="grado.grado" 
+                      name="Letra2" 
+                      required maxlength="1"
+                      onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false; return espacios(event);"/>
 										<mat-error *ngIf="cursoInput.hasError('required')">Campo Requerido</mat-error>
 									</mat-form-field>
                 </div>
@@ -43,7 +49,7 @@
             <div class="modal-footer">
 
               <button type="button" class="btn btn-info"  [disabled]="formCurso.invalid" (keyup.enter)="creargrado()" (click)="creargrado()" data-dismiss="modal">
-                <mat-icon>person_add</mat-icon> Agregar
+                <mat-icon>apartment</mat-icon> Agregar
               </button>
               <button type="button" class="btn btn-danger" data-dismiss="modal" >
                 <mat-icon>remove</mat-icon> Cancelar
@@ -56,14 +62,14 @@
 
     <div class="col-md-4">
       <a id="modal-59944" href="#modal-paralelo" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Crear Paralelo
+        <mat-icon>school</mat-icon> Crear Paralelo
       </a>
       <div class="modal fade" id="modal-paralelo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Crear Paralelo
+                <mat-icon>school</mat-icon> Crear Paralelo
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
@@ -87,7 +93,7 @@
             <div class="modal-footer">
 
               <button type="button" class="btn btn-info"  [disabled]="formPara.invalid" (click)="crearparalelo()" data-dismiss="modal">
-                <mat-icon>person_add</mat-icon> Agregar
+                <mat-icon>school</mat-icon> Agregar
               </button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">
                 <mat-icon>remove</mat-icon> Cancelar
@@ -99,52 +105,57 @@
     </div>
     <div class="col-md-4">
       <a id="modal-5994" href="#modal-pg" role="button" class="btn btn-success" data-toggle="modal">
-        <mat-icon>person_add</mat-icon> Asignar Grado
+        <mat-icon>table_chart</mat-icon> Asignar Grado
       </a>
       <div class="modal fade" id="modal-pg" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="myModalLabel">
-                <mat-icon>person_add</mat-icon> Asignar Curso-Paralelo
+                <mat-icon>table_chart</mat-icon> Asignar Curso-Paralelo
               </h5>
               <button type="button" class="close" data-dismiss="modal">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
             <div class="modal-body">
-              <mat-form-field>
-                <mat-label>Seleccione Grado</mat-label>
-                <mat-select [(ngModel)]="grado.idGrado" name="sisop">
-                  <mat-option *ngFor="let grado of grados" value="{{grado.idGrado}}"
-                    >
-                    {{grado.nombreGrado | uppercase}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+              <form #formGrado="ngForm" role="form">
+                <div class="form-group">
+                <mat-form-field>
+                  <mat-label>Seleccione Grado</mat-label>
+                  <mat-select [(ngModel)]="grado.idGrado" name="sisop" #select1="ngModel" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let grado of grados" value="{{grado.idGrado}}">
+                      {{grado.nombreGrado | uppercase}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="select1.hasError('required')">Selecciona un Grado</mat-error>
+                </mat-form-field>
+                </div>
+                <div class="form-group">
+                <mat-form-field>
+                  <mat-label>Seleccione Paralelo</mat-label>
+                  <mat-select [(ngModel)]="paralelo.idParalelo" name="par" #select2="ngModel" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let paralelo of paralelos1" value="{{paralelo.idParalelo}}"
+                      >
+                      {{paralelo.paralelo | uppercase}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="select2.hasError('required')">Selecciona un Paralelo</mat-error>
 
-              <mat-form-field>
-                <mat-label>Seleccione Paralelo</mat-label>
-                <mat-select [(ngModel)]="paralelo.idParalelo" name="par">
-                  <mat-option *ngFor="let paralelo of paralelos1" value="{{paralelo.idParalelo}}"
-                    >
-                    {{paralelo.paralelo | uppercase}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-
+                </mat-form-field>
+                </div>
+                </form>
               <!-- <select type="number" [(ngModel)]="selectedValue">
                 <option *ngFor="let grado of grados" [ngValue]="c">{{grado.nombreGrado}}</option>
               </select> -->
 
-             
-
-
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-info" (click)="creargradop(grado.idGrado,paralelo.idParalelo)" data-dismiss="modal">
-                <mat-icon>person_add</mat-icon> Agregar
+              <button type="button" class="btn btn-info" [disabled]="formGrado.invalid" (click)="creargradop(grado.idGrado,paralelo.idParalelo)" data-dismiss="modal">
+                <mat-icon>table_chart</mat-icon> Agregar
               </button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">
                 <mat-icon>remove</mat-icon> Cancelar

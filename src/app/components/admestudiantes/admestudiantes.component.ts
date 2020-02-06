@@ -116,6 +116,12 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
 
   agregarestu() {
     console.log(this.usuario);
+    this.usuario.nombre = this.usuario.nombre.toUpperCase();
+    this.usuario.apellido= this.usuario.apellido.toUpperCase();
+    this.usuario.direccion = this.usuario.direccion.toUpperCase();
+    this.usuario.referenciaPersNombre = this.usuario.referenciaPersNombre.toUpperCase();
+    this.usuario.correo = this.usuario.correo.toLowerCase();
+
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
@@ -134,7 +140,7 @@ export class AdmestudiantesComponent implements OnInit, AfterViewInit {
       error => {
         this.toastService.error(
           "Vuelva a intertarlo",
-          "Datos NO Estudiante !");
+          "Verifique sus Datos!");
         this.options
       }
     );

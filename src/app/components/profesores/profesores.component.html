@@ -25,7 +25,8 @@
 									<div class="row">
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput #message minlength="10" maxlength="10"
+												<input matInput #message 
+													minlength="9" maxlength="10"
 													placeholder="Número de Cédula" 
 													name="cedula"
 													[(ngModel)]="usuario.cedula"
@@ -48,9 +49,9 @@
 											id="nombre" 
 											minlength="3"
 											type="text" 
+											class="text-uppercase"
 											[(ngModel)]="usuario.nombre" #nombreInput="ngModel" required
-											onkeyup="this.value=this.value.toUpperCase();"
-											onkeypress="return check(event);" 
+											oninput="this.value = this.value.replace(/[^a-z A-Z]/g,'')"
 											onpaste="return false" />
 										<mat-error *ngIf="nombreInput.hasError('required')">Campo Requerido</mat-error>
 										<mat-error *ngIf="nombreInput.hasError('minlength')">Mínimo 3 caracteres
@@ -64,9 +65,10 @@
 											placeholder="Apellidos" 
 											name="apellido" 
 											minlength="3"
+											type="text" 
+											class="text-uppercase"
 											[(ngModel)]="usuario.apellido" #apellidoInput="ngModel" required
-											onkeyup="this.value=this.value.toUpperCase();"
-											onkeypress="return check(event)" 
+											oninput="this.value = this.value.replace(/[^a-z A-Z]/g,'')" 
 											onpaste="return false" />
 										<mat-error *ngIf="apellidoInput.hasError('required')">Campo Requerido
 										</mat-error>
@@ -80,8 +82,8 @@
 											placeholder="Dirección" 
 											name="direccion" 
 											minlength="5"
-											onkeyup="this.value=this.value.toUpperCase();"
-											[(ngModel)]="usuario.direccion" required #direccionInput="ngModel" />
+											class="text-uppercase"
+											[(ngModel)]="usuario.direccion" #direccionInput="ngModel" required />
 										<mat-error *ngIf="direccionInput.hasError('required')">Campo Requerido
 										</mat-error>
 										<mat-error *ngIf="direccionInput.hasError('minlength')">Mínimo 5 caracteres
@@ -124,9 +126,11 @@
 									<mat-form-field class="example-full-width">
 										<input matInput placeholder="Correo Electrónico" 
 											name="correo"
+											class="text-lowercase"
 											[formControl]="emailFormControl" 
 											[errorStateMatcher]="matcher"
-											[(ngModel)]="usuario.correo">
+											[(ngModel)]="usuario.correo"
+											>
 
 										<mat-error
 											*ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -142,12 +146,14 @@
 									<div class="row">
 										<div class="col-md-6">
 											<mat-form-field class="example-full-width">
-												<input matInput placeholder="Nombre de Contacto" 
+												<input matInput 
+													placeholder="Nombre de Contacto" 
 													name="nombrecontacto"
-													[(ngModel)]="usuario.referenciaPersNombre"
-													onkeyup="this.value=this.value.toUpperCase();"
-													#representanteInput="ngModel" required
-													onkeypress="return check(event)" />
+													class="text-uppercase"
+													[(ngModel)]="usuario.referenciaPersNombre" 
+													#representanteInput="ngModel" 
+													oninput="this.value = this.value.replace(/[^a-z A-Z]/g,'')" required />
+
 												<mat-error *ngIf="representanteInput.hasError('required')">Campo
 													Requerido</mat-error>
 												<mat-error *ngIf="representanteInput.hasError('minlength')">Mínimo 3
@@ -197,7 +203,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#asignarp">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#asignarp"><mat-icon>how_to_reg</mat-icon>
 				Asignar un Profesor a una materia
 			</button>
 
@@ -207,43 +213,50 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Asignar un Profesor</h5>
+							<h5 class="modal-title" id="exampleModalLabel"><mat-icon>how_to_reg</mat-icon>Asignar un Profesor</h5> 
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							<mat-form-field>
-								<mat-label>Seleccione Un Profesor</mat-label>
-								<mat-select  name="sisop">
-								  <mat-option *ngFor="let profesor of profesores" value="{{profesor.idDocente}}" (click)=" save1(profesor.idDocente)">
-									{{profesor.nombre}} {{profesor.apellido}}
-								  </mat-option>
-								</mat-select>
-							  </mat-form-field>
-							  <mat-form-field>
-								<mat-label>Seleccione Una Materia</mat-label>
-								<mat-select  name="td">
-								  <mat-option *ngFor="let materia of materias" value="{{materia.idMateria}}" (click)=" save2(materia.idMateria)"
-									>
-									{{materia.materia}} 
-								  </mat-option>
-								</mat-select>
-							  </mat-form-field>
+							<form #formProfe="ngForm" role="form">
+								<div class="form-group">
+									<mat-form-field>
+										<mat-label>Seleccione Un Profesor</mat-label>
+										<mat-select  name="sisop">
+										<mat-option *ngFor="let profesor of profesores" value="{{profesor.idDocente}}" (click)=" save1(profesor.idDocente)" >
+											{{profesor.nombre}} {{profesor.apellido}}
+										</mat-option>
+										</mat-select>
+									</mat-form-field>
+								</div>
+								<div class="form-group">
+
+								<mat-form-field>
+									<mat-label>Seleccione Una Materia</mat-label>
+									<mat-select  name="td">
+									<mat-option *ngFor="let materia of materias" value="{{materia.idMateria}}" (click)=" save2(materia.idMateria)" >
+										{{materia.materia}} 
+									</mat-option>
+									</mat-select>
+								</mat-form-field>
+								</div>
+							<div class="form-group">
+							
 							  <mat-form-field>
 								<mat-label>Seleccione Un Grado</mat-label>
 								<mat-select  name="ddd">
-								  <mat-option *ngFor="let grado of grados" value="{{grado.idGradoParalelo}}" (click)=" save3(grado.idGradoParalelo)"
-									>
+								  <mat-option *ngFor="let grado of grados" value="{{grado.idGradoParalelo}}" (click)=" save3(grado.idGradoParalelo)" >
 									{{grado.grado.grado}}  {{grado.paralelo.paralelo}}
 								  </mat-option>
 								</mat-select>
 							  </mat-form-field>
-							  
+							</div>
+							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" (click)="asignar()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button type="button" [disabled]="formProfe.invalid" (click)="asignar()" class="btn btn-primary" data-dismiss="modal"><mat-icon>how_to_reg</mat-icon>Guardar</button>
 						</div>
 					</div>
 				</div>
@@ -270,25 +283,25 @@
 
 				<table mat-table [(dataSource)]="dataSource" matSort>
 					<ng-container matColumnDef="cedula">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cedula</b>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Cédula</b>
 						</th>
 						<td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
 					</ng-container>
 					<ng-container matColumnDef="nombres">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Nombres</b> </th>
-						<td mat-cell *matCellDef="let element"> {{element.nombre  | uppercase}} </td>
+						<td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
 					</ng-container>
 					<ng-container matColumnDef="apellidos">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Apellidos</b> </th>
-						<td mat-cell *matCellDef="let element"> {{element.apellido  | uppercase}} </td>
+						<td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
 					</ng-container>
 					<ng-container matColumnDef="correo">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Correo</b> </th>
 						<td mat-cell *matCellDef="let element"> {{element.correo }} </td>
 					</ng-container>
 					<ng-container matColumnDef="direccion">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Direccion</b> </th>
-						<td mat-cell *matCellDef="let element"> {{element.direccion  | uppercase}} </td>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Dirección</b> </th>
+						<td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
 					</ng-container>
 					<ng-container matColumnDef="telefonoConvencional">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Teléfono Convencional</b> </th>
@@ -300,7 +313,7 @@
 					</ng-container>
 					<ng-container matColumnDef="referenciaPersNombre">
 						<th mat-header-cell *matHeaderCellDef mat-sorteader> <b>Nombre Representante</b> </th>
-						<td mat-cell *matCellDef="let element"> {{element.referenciaPersNombre  | uppercase}} </td>
+						<td mat-cell *matCellDef="let element"> {{element.referenciaPersNombre}} </td>
 					</ng-container>
 					<ng-container matColumnDef="referenciaPersTelf">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header> <b>Teléfono Representante</b> </th>
