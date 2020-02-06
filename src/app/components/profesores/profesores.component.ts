@@ -32,7 +32,7 @@ export class ProfesoresComponent implements OnInit, AfterViewInit {
   public mostrarMensajeFiltro: boolean;
   public displayedColumns = ['cedula', 'nombres', 'apellidos', 'correo', 'direccion', 'telefonoConvencional', 'telefonoCelular', 'referenciaPersNombre', 'referenciaPersTelf'];
   public dataSource = new MatTableDataSource<Persona>();
-nombre:string='';
+  nombre: string = '';
 
   /// validatr input
   emailFormControl = new FormControl('', [
@@ -141,7 +141,7 @@ nombre:string='';
   agregarprof() {
     console.log(this.usuario);
     this.usuario.nombre = this.usuario.nombre.toUpperCase();
-    this.usuario.apellido= this.usuario.apellido.toUpperCase();
+    this.usuario.apellido = this.usuario.apellido.toUpperCase();
     this.usuario.direccion = this.usuario.direccion.toUpperCase();
     this.usuario.referenciaPersNombre = this.usuario.referenciaPersNombre.toUpperCase();
     this.usuario.correo = this.usuario.correo.toLowerCase();
@@ -150,7 +150,7 @@ nombre:string='';
     this.apiService.addData(this.usuario, 'addperson').subscribe(
       data => {
         if (data) {
-          this.toastService.success("","Profesor Agregado",this.options);
+          this.toastService.success(data.message, "Profesor Agregado", this.options);
           console.log(data);
           this.cargarprofesores();
           this.profesorid();
@@ -215,9 +215,9 @@ nombre:string='';
       }
     )
   }
-docente: number;
-materia: number;
-grado: number;
+  docente: number;
+  materia: number;
+  grado: number;
   save1(docente) {
     this.docente = docente;
   }
@@ -227,33 +227,60 @@ grado: number;
   save3(grado) {
     this.grado = grado;
   }
-  asignars : any;
+  asignars: any;
 
-  asignar(){
+  asignar() {
     this.asignars = {
       idDocente: this.docente,
       idMateria: this.materia,
       idGrado: this.grado
     }
     this.asignarprof();
+    data => {
+      if (data.message) {
+        console.log(data)
+        this.toastService.info(
+          data.message,
+          "Materia asignada",
+          this.options);
+      } else {
+        this.toastService.info(
+          data.message,
+          "Materia no insertada",
+          this.options
+        );
+      }
+    }
   }
 
-  asignarprof(){
-    this.apiService.addData(this.asignars,'profesorasig1').subscribe(
-      data =>{
-        if (data.message){
-          //usar el mensaje
-          console.log(data.message);
+  asignarprof() {
+    this.apiService.addData(this.asignars, 'profesorasig1').subscribe(
+      data => {
+        if (data.message) {
+          console.log(data)
+          this.toastService.info(
+            data.message,
+            "Profesor asignado",
+            this.options);
+        } else {
+          this.toastService.info(
+            data.message,
+            "Profesor no insertado",
+            this.options
+          );
         }
       }
-    )
+
+    );
   }
+
+
   validarCorreoElectronico(nombre: string) {
     const expreg = /^[a-z A-Z]*$/;
     if (expreg.test(nombre)) {
       console.log('select q1,q2,average(q1,q2) as promedio from asdas');
-      this.nombre = nombre; 
-      return true;      
+      this.nombre = nombre;
+      return true;
     } else {
       console.log('adios');
       return false;
