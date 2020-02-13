@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 99999 !important; } 
+.tiledBackground {
+    background-image: url(assets/img/school3.jpg);
+    background-size: 150px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid;
+    color: pink;
+}

@@ -1,121 +1,72 @@
 <div class="container-fluid">
- 
-  <!-- Material form login -->
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-4 banner-sec">
-                    <div class="signup__overlay"></div>
-                    <div class="banner">
-                        <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
-                            <div class="carousel-inner text-center">
-                                <div class="carousel-item active">
-                                    <!-- <img src="../../assets/img/Espe-Logo.png" class="img-fluid center"> -->
+    <div class="tiledBackground">
+        <!-- Material form login -->
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4 banner-sec">
+                        <div class="signup__overlay"></div>
+                        <div class="banner">
+                            <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
+                                <div class="carousel-inner text-center">
+                                    <div class="carousel-item active">
+                                        <!-- <img src="../../assets/img/Espe-Logo.png" class="img-fluid center"> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-8 login-sec" style="text-align:center">
-                    <mat-grid-list class="example-card" cols="2" rowHeight="100px">
-                        <mat-grid-tile
-                                *ngFor="let tile of tiles"
-                                [colspan]="tile.cols"
-                                [rowspan]="tile.rows"
+                    <div class="col-md-8 login-sec" style="text-align:center">
+                        <mat-grid-list class="example-card" cols="2" rowHeight="100px">
+                            <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
                                 [style.background]="tile.color">
-                                <h2 class="text-center">BIENVENIDO AL SISTEMA DE NOTAS</h2>
-
+                                <h2 class="text-center">SISTEMA DE CALIFICACIONES</h2>
                             </mat-grid-tile>
-                            
-                    </mat-grid-list>
-                       
-                      
-                       <mat-card class="example-card">
-                       <mat-card-content>
-                        
-                        <form #login="ngForm" class="form" (keyup.enter)="loginpass()">
-                            
-                            <div style="font-size: 18px">
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Cédula</mat-label>
-                                  <input matInput placeholder="Cédula" [(ngModel)]="credential.cedula" name="usuario" required
-                                  #usuarioInput="ngModel">
-                                  <mat-icon matSuffix>account_circle</mat-icon>
-                                  <mat-error *ngIf="usuarioInput.hasError('required')">Cedula es
-                                    requerido.
-                                </mat-error>
-                                </mat-form-field>
 
-                                <mat-form-field appearance="outline">
-                                  <mat-label>Contraseña</mat-label>
-                                  <input matInput placeholder="Contraseña" [(ngModel)]="credential.clave" name="contraseña" required
-                                  #passInput="ngModel" [type]="hide ? 'password' : 'text'">
-                                  <mat-icon class="material-icons" matSuffix
-                                  (click)="hide = !hide">
-                                  {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                    <mat-error *ngIf="passInput.hasError('required')">Contraseña es
-                                        requerido.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                        </form>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button type="button" class="btn btn-warning btn-lg" [disabled]="login.invalid"
-                            (click)="loginpass()"><i class="material-icons">
-                                lock_open
-                                </i><strong> Ingresar</strong></button>
-                    </mat-card-actions>
-                    
-                </mat-card>
-                    <!--<div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-1">
+                        </mat-grid-list>
+
+
+                        <mat-card class="example-card">
+                            <mat-card-content>
+
+                                <form #login="ngForm" class="form" (keyup.enter)="loginpass()">
+
+                                    <div style="font-size: 18px">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Cédula</mat-label>
+                                            <input matInput placeholder="Cédula" [(ngModel)]="credential.cedula"
+                                                name="usuario" required #usuarioInput="ngModel">
+                                            <mat-icon matSuffix>account_circle</mat-icon>
+                                            <mat-error *ngIf="usuarioInput.hasError('required')">Cedula es
+                                                requerido.
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Contraseña</mat-label>
+                                            <input matInput placeholder="Contraseña" [(ngModel)]="credential.clave"
+                                                name="contraseña" required #passInput="ngModel"
+                                                [type]="hide ? 'password' : 'text'">
+                                            <mat-icon class="material-icons" matSuffix (click)="hide = !hide">
+                                                {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            <mat-error *ngIf="passInput.hasError('required')">Contraseña es
+                                                requerido.
+                                            </mat-error>
+                                        </mat-form-field>
                                     </div>
-                                     <div class="col-md-10">
-                                        <mat-card class="example-card">
-                                            <mat-card-content>
-                                                <form #login="ngForm" class="example-form" (keyup.enter)="loginpass()">
-                                                    <mat-form-field appearance="legacy">
-                                                        <mat-label class="texto"> <strong>Cedula</strong></mat-label>
-                                                        <input matInput placeholder="Ingrese su Id"
-                                                            [(ngModel)]="credential.cedula" name="usuario" required
-                                                            #usuarioInput="ngModel">
-                                                        <mat-error *ngIf="usuarioInput.hasError('required')">Cedula es
-                                                            requerido.
-                                                        </mat-error>
-                                                    </mat-form-field>
-                                                    <mat-form-field appearance="legacy">
-                                                        <mat-label class="texto"><Strong>Contraseña</Strong></mat-label>
-                                                        <input matInput placeholder="Ingrese su contraseña"
-                                                            [(ngModel)]="credential.clave" name="contraseña" required
-                                                            #passInput="ngModel" [type]="hide ? 'password' : 'text'">
-                                                        <mat-icon class="material-icons" matSuffix
-                                                            (click)="hide = !hide">
-                                                            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                        <mat-error *ngIf="passInput.hasError('required')">Contraseña es
-                                                            requerido.
-                                                        </mat-error>
-                                                    </mat-form-field>
-                                                </form>
-                                            </mat-card-content>
-                                            <mat-card-actions>
-                                                <button class="btn btn-success btn-round" [disabled]="login.invalid"
-                                                    type="submit"
-                                                    (click)="loginpass()"><strong>Ingresar</strong></button>
-                                            </mat-card-actions>
-                                        </mat-card>
-                                    </div> 
-                                    <div class="col-md-3">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
+                                </form>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button type="button" class="btn btn-warning btn-lg" [disabled]="login.invalid"
+                                    (click)="loginpass()"><i class="material-icons">
+                                        lock_open
+                                    </i><strong> Ingresar</strong></button>
+                            </mat-card-actions>
+
+                        </mat-card>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
