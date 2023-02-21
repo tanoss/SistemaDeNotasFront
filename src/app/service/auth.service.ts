@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { environment } from "environments/environment";
 
 const http = {
   headers: new HttpHeaders({
@@ -13,11 +14,13 @@ const http = {
   providedIn: "root"
 })
 export class AuthService {
+
+  ult = environment.urlapi;
   constructor(private http: HttpClient) {}
 
   login(credetianl) {
     let pass = JSON.stringify(credetianl);
-    return this.http.post("/sdn/login", pass, http).pipe(
+    return this.http.post(this.ult+"/sdn/login", pass, http).pipe(
       map(
         (res: any) => {
           return res;

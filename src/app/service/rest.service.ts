@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { environment } from "environments/environment";
 
 const http = {
   headers: new HttpHeaders({
@@ -14,11 +15,13 @@ const http = {
   providedIn: "root"
 })
 export class RestService {
+
+   ult = environment.urlapi;
   constructor(private http: HttpClient) {}
 
   // Funcion unica de consulta----------------------------------------
   getData(seg: String): Observable<any> {
-    return this.http.get<any>('/sdn/' + seg).pipe(
+    return this.http.get<any>(this.ult+'/sdn/' + seg).pipe(
       map((data: any) => {
         return data;
       })
@@ -28,7 +31,7 @@ export class RestService {
   // Funcion unica para guargar---------------------------------------
   addData(sistema, add: String) {
     let sistemaAdd = JSON.stringify(sistema);
-    return this.http.post("/sdn/" + add, sistemaAdd, http).pipe(
+    return this.http.post(this.ult+"/sdn/" + add, sistemaAdd, http).pipe(
       map(
         (res: any) => {
           return res;
@@ -42,7 +45,7 @@ export class RestService {
   // Funcion unica para actualizar-----------------------------------
   updateData(sistema, upd: String) {
     let sistemaUpdate = JSON.stringify(sistema);
-    return this.http.put("/sdn/" + upd, sistemaUpdate, http).pipe(
+    return this.http.put(this.ult+"/sdn/" + upd, sistemaUpdate, http).pipe(
       map(
         (res: any) => {
           return res;
@@ -55,7 +58,7 @@ export class RestService {
   }
   // Funcion unica para actualizar-----------------------------------
   deleteData(id: number, upd: String) {
-    return this.http.delete("/adm/" + upd + "/" + id, http).pipe(
+    return this.http.delete(this.ult+"/adm/" + upd + "/" + id, http).pipe(
       map(
         (res: any) => {
           return res;
@@ -68,7 +71,7 @@ export class RestService {
   }
 
   findData(id: number, upd: String) {
-    return this.http.get('/adm/' + upd + '/' + id, http).pipe(
+    return this.http.get(this.ult+'/adm/' + upd + '/' + id, http).pipe(
       map(
         (res: any) => {
           return res;
@@ -81,7 +84,7 @@ export class RestService {
   }
 
   findDataUser(user: String) {
-    return this.http.get('/adm/id/' + user + '/1', http).pipe(
+    return this.http.get(this.ult+'/adm/id/' + user + '/1', http).pipe(
       map(
         (res: any) => {
           return res;
@@ -94,7 +97,7 @@ export class RestService {
   }
 
   findRole(user: String) {
-    return this.http.get('/sdn/role/' + user , http).pipe(
+    return this.http.get(this.ult+'/sdn/role/' + user , http).pipe(
       map(
         (res: any) => {
           return res;
@@ -107,7 +110,7 @@ export class RestService {
   }
 
   findDataBanner(id: string) {
-    return this.http.get('/banner/' + id, http).pipe(
+    return this.http.get(this.ult+'/banner/' + id, http).pipe(
       map(
         (res: any) => {
           return res;
